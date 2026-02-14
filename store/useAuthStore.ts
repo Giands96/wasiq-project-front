@@ -23,13 +23,9 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
-
-      // Reducers (Cómo cambia el estado)
       //* login recoge user y token, y setea el estado correspondiente
       login: (user, token) => set({ user, token, isAuthenticated: true }),
       logout: () => {
-        // Al cerrar sesión, limpiamos todo y también borramos el token de localStorage
-        localStorage.removeItem('token'); 
         set({ user: null, token: null, isAuthenticated: false });
       },
     }),
