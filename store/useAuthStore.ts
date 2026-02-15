@@ -31,6 +31,11 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'wasiq-auth-storage',
+      partialize: (state) => ({ 
+        token: state.token, 
+        user: state.user, 
+        isAuthenticated: state.isAuthenticated 
+      }),
     }
   )
 );

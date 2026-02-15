@@ -1,14 +1,14 @@
 import api from '@/lib/axios';
-import {ROUTES} from '@/shared/constants/routes';
+import {API_ENDPOINTS} from '@/shared/constants/routes';
 import { AuthResponse, LoginRequest } from '../types/auth.types';
 
 export const authService = {
     login: async (credentials: LoginRequest): Promise<AuthResponse> => {
-        const {data} = await api.post<AuthResponse>(ROUTES.AUTH.LOGIN, credentials);
+        const {data} = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, credentials);
         return data;
     },
     register: async (credentials: LoginRequest): Promise<AuthResponse> => {
-        const {data} = await api.post<AuthResponse>(ROUTES.AUTH.REGISTER, credentials);
+        const {data} = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.REGISTER, credentials);
         return data;
     }
 }

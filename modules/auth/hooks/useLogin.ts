@@ -18,17 +18,8 @@ export const useLogin = () => {
 
         try {
             const response = await authService.login(data);
-            
-            const mockUser = {
-        id: 0,
-        email: data.email,
-        firstName: 'Usuario',
-        lastName: 'Wasiq',
-        role: 'USER' as const, // Forzamos el tipo por ahora
-        active: true
-      };
 
-            loginToStore(mockUser, response.token);
+            loginToStore(response.user, response.token);
 
             router.push(ROUTES.HOME);
         } catch (error) {
