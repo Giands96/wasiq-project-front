@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/shared/constants/routes";
 import { useAuthStore } from "@/store/useAuthStore";
-import { User, Menu, LogOut, Home, Settings, MenuIcon, Headset } from "lucide-react";
+import { User, Menu, LogOut, Home, Settings, MenuIcon, Headset, House } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -26,7 +26,8 @@ const UserMenu = () => {
   };
 
   return (
-    <DropdownMenu>
+    <div className="flex">
+      <DropdownMenu >
       <DropdownMenuTrigger asChild>
         <button className="cursor-pointer bg-white border border-gray-200 px-3 py-1.5 rounded-full shadow-xs transition-all flex items-center gap-3 hover:shadow-md outline-none">
           <div className="bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center text-neutral-600">
@@ -58,7 +59,13 @@ const UserMenu = () => {
             <LogOut className="mr-2 h-4 w-4" /> Cerrar Sesión
         </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
+      
+      </DropdownMenu>
+      <Link href={ROUTES.PROPERTIES.CREATE} className="ml-4 px-3  flex items-center justify-center  text-white bg-normal-link rounded-full hover:bg-hover-link transition-all text-md">
+        <House className="mr-2" />Publicar Propiedad
+      </Link>
+    </div>
+    
   );
 };
 
