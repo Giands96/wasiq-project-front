@@ -129,14 +129,15 @@
     @apply bg-background text-foreground;
     @apply bg-background text-foreground;
   }
+
+  
 }
 
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display:none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
