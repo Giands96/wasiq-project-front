@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 
-const rubik = Rubik({
+const manrope = Manrope({
   subsets: ["latin"],
 })
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.className} antialiased` }>
+      <body className={`${manrope.className} antialiased` }>
         {children}
       </body>
     </html>

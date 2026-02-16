@@ -9,6 +9,9 @@
   --color-foreground: var(--foreground);
   --color-beige: var(--beige-color);
   --color-beige-dark: var(--beige-dark);
+  --color-primary-button: var(--primary-button);
+  --color-normal-link: var(--normal-link);
+  --color-hover-link: var(--hover-link);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -54,8 +57,13 @@
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
   --card: oklch(1 0 0);
+  /* Custom colors*/
   --beige-color: #FAF3E1;
   --beige-dark: #F5E7C6;
+  --primary-button: #C9B48A;
+  --normal-link: #8F7A54;
+  --hover-link: #6E5C3E;
+  /* Custom colors */
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
