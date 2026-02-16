@@ -1,5 +1,16 @@
 export type OperationType = 'SALE' | 'RENT';
 export type PropertyType = 'HOUSE' | 'APARTMENT' | 'LAND';
+export type PaginatedResponse<T> = {
+    content: T[];
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    number: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
+}
+
 
 export interface PropertyImage {
     id: number;
@@ -27,7 +38,7 @@ export interface Property {
     }
 }
 
-export interface CreatePropertyDto {
+export interface CreatePropertyRequest {
     title: string;
     description: string;
     price: number;
@@ -37,5 +48,18 @@ export interface CreatePropertyDto {
     area:number;
     operationType: OperationType;
     propertyType: PropertyType;
-    
+    images: File[];
+}
+
+export interface UpdatePropertyRequest {
+    title?: string;
+    description?: string;
+    price?: number;
+    address?: string;
+    bedrooms?: number;
+    bathrooms?: number;
+    area?:number;
+    operationType?: OperationType;
+    propertyType?: PropertyType;
+    images?: string[];
 }
