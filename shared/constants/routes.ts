@@ -8,6 +8,8 @@ export const ROUTES = {
     PROPERTIES: {
         LIST: '/properties',
         DETAIL: (id:string) => `/properties/${id}`,
+        CREATE: '/properties/create',
+        UPDATE: (id:string) => `/properties/update/${id}`,
     },
     CONTACT: {
         US: '/contact',
