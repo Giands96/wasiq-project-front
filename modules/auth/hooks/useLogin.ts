@@ -26,7 +26,7 @@ export const useLogin = () => {
             const axiosError = error as AxiosError;
 
             if(axiosError.response?.status === 403) {
-                setError('Invalid email or password');
+                setError('Invalid credentials');
             } else {
                 setError('An error occurred while trying to log in. Please try again later.');
             }
