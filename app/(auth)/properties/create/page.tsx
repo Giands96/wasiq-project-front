@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const page = () => {
+export default function CreatePropertyPage() {
   return (
     <div>page</div>
   )
