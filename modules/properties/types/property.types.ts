@@ -1,5 +1,10 @@
 export type OperationType = 'SALE' | 'RENT';
 export type PropertyType = 'HOUSE' | 'APARTMENT' | 'LAND';
+
+// Union types para validar los tipos de propiedad y operación
+export const OPERATION_TYPES = ['SALE', 'RENT'] as const;
+export const PROPERTY_TYPES = ['HOUSE', 'APARTMENT', 'LAND'] as const;
+
 export type PaginatedResponse<T> = {
     content: T[];
     totalPages: number;
@@ -61,5 +66,6 @@ export interface UpdatePropertyRequest {
     area?:number;
     operationType?: OperationType;
     propertyType?: PropertyType;
-    images?: string[];
+    images?: File[];
+    keptImageIds?: number[]; // IDs de las imágenes que se desean mantener
 }
