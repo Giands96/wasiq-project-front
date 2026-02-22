@@ -26,7 +26,9 @@ export const API_ENDPOINTS = {
     PROPERTIES: {
         LIST: '/properties',
         CREATE: '/properties/create',
+        DETAIL: (id: number) => `/properties/${id}`,
         UPDATE: (id: number) => `/properties/update/${id}`,
         DELETE: (id: number) => `/properties/delete/${id}`,
+        GET_ALL: '/properties',
     }
 };
