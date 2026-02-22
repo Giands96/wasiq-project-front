@@ -10,6 +10,7 @@
   --color-beige: var(--beige-color);
   --color-beige-dark: var(--beige-dark);
   --color-primary-button: var(--primary-button);
+  --color-primary-button-hover: var(--primary-button-hover);
   --color-normal-link: var(--normal-link);
   --color-hover-link: var(--hover-link);
   --font-sans: var(--font-geist-sans);
@@ -61,6 +62,7 @@
   --beige-color: #FAF3E1;
   --beige-dark: #F5E7C6;
   --primary-button: #C9B48A;
+  --primary-button-hover: #B39B6B;
   --normal-link: #8F7A54;
   --hover-link: #6E5C3E;
   /* Custom colors */
