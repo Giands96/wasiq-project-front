@@ -7,12 +7,28 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Custom colors*/
   --color-beige: var(--beige-color);
   --color-beige-dark: var(--beige-dark);
   --color-primary-button: var(--primary-button);
   --color-primary-button-hover: var(--primary-button-hover);
   --color-normal-link: var(--normal-link);
   --color-hover-link: var(--hover-link);
+  /* End custom colors*/
+  /* Colors */
+  --color-bg-main: var(--bg-main);
+  --color-bg-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-primary-base: var(--primary-base);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-text: var(--primary-text);
+  --color-secondary-base: var(--secondary-base);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-text: var(--secondary-text);
+  --color-border-light: var(--border-light);
+  --color-status-success: var(--status-success);
+  --color-status-error: var(--status-error);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -66,6 +82,29 @@
   --normal-link: #8F7A54;
   --hover-link: #6E5C3E;
   /* Custom colors */
+  --bg-main: #FCFAFC;       /* Blanco roto muy cálido. No cansa la vista. */
+  --bg-card: #F5F2EB;       /* Un beige suave para que las tarjetas resalten sutilmente sobre el fondo. */
+
+  /* 🖋️ TEXTOS (Máximo contraste) */
+  --text-primary: #2C2824;  /* Casi negro, con un leve toque marrón. Para Títulos (H1, H2). */
+  --text-secondary: #5C544B;/* Para descripciones, direcciones y detalles secundarios. */
+
+  /* 🎯 ACCIÓN PRINCIPAL (Tu tono dorado/arena) */
+  --primary-base: #C2A878;  /* Botones principales y acentos visuales. */
+  --primary-hover: #A68D5D; /* Al pasar el ratón (Hover). */
+  --primary-text: #FFFFFF;  /* El texto dentro del botón principal siempre blanco. */
+
+  /* ⚖️ ACCIÓN SECUNDARIA (Neutros y elegantes) */
+  --secondary-base: #E8E2D6;/* Para botones secundarios o etiquetas (badges). */
+  --secondary-hover: #DCD4C4;
+  --secondary-text: #4A433A;/* El texto sobre el botón secundario. */
+
+  /* 📏 BORDES */
+  --border-light: #E0D9CC;  /* Para inputs de formularios y bordes de tarjetas. */
+
+  /* 🚦 ESTADOS (Adaptados a tonos tierra) */
+  --status-success: #7A8B6B; /* Verde oliva (Ej: Disponible, Activo). */
+  --status-error: #B06A62;   /* Terracota suave (Ej: Error, Eliminar). */
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
