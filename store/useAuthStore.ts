@@ -12,6 +12,8 @@ interface AuthState {
     isAuthenticated: boolean;
     // Acción para iniciar sesión
     login: (user:User, token:string) => void;
+    _hasHydrated: boolean;
+    setHasHydrated: (state: boolean) => void;
     // Acción para cerrar sesión
     logout: () => void;
 }
@@ -23,6 +25,8 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
       //* login recoge user y token, y setea el estado correspondiente
       login: (user, token) => set({ user, token, isAuthenticated: true }),
       logout: () => {
@@ -34,8 +38,12 @@ export const useAuthStore = create<AuthState>()(
       partialize: (state) => ({ 
         token: state.token, 
         user: state.user, 
-        isAuthenticated: state.isAuthenticated 
+        isAuthenticated: state.isAuthenticated,
+        
       }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      }
     }
   )
 );
