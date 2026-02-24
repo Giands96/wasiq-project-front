@@ -73,7 +73,7 @@ export const LoginForm = () => {
             
             <CardHeader className="text-center space-y-1">
               <div className="text-left">
-                <Link className=" hover:underline" href={ROUTES.HOME}><MoveLeftIcon className="inline mr-2" />Volver al inicio</Link>
+                <Link className="text-neutral-400 hover:underline" href={ROUTES.HOME}><MoveLeftIcon className="inline mr-2 w-4 h-4" />Volver al inicio</Link>
               </div>
               <CardTitle className="text-2xl font-bold">
                 Bienvenido 👋
