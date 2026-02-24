@@ -3,12 +3,16 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import { Home, Bed, Bath, Maximize, MapPin, Calendar, Mail, User, ExternalLink, Share2, Heart } from 'lucide-react';
 import Image from 'next/image';
+import { useAuthStore } from '@/store/useAuthStore';
+import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 
 interface PropertyDetailsPageProps {
     params: {
         slug: string;
     }
 }
+
+
 
 export default async function PropertyDetailsPage({ params }: PropertyDetailsPageProps) {
     const { slug } = await params;
@@ -18,10 +22,11 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
         return notFound();
     }
 
+
     // Formatear precio
     const formattedPrice = new Intl.NumberFormat('es-PE', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'PEN',
         minimumFractionDigits: 0
     }).format(property.price);
 
@@ -200,15 +205,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                 </div>
                             </div>
                         
-                            {/* Botones de acción */}
-                            <div className='space-y-3'>
-                                <button className='w-full bg-beige text-neutral-800 py-3 px-4 rounded-lg font-semibold hover:bg-beige-dark transition'>
-                                    Agendar Visita
-                                </button>
-                                <button className='w-full border-2 border-gray-300 text-gray-900 py-3 px-4 rounded-lg font-semibold hover:bg-gray-50 transition'>
-                                    Contactar Agente
-                                </button>
-                            </div>
+                            <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
 
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${
