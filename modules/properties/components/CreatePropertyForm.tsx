@@ -12,6 +12,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/shared/components/ui/input";
 import {Button} from "@/shared/components/ui/button";
 import { toast } from "sonner";
+import { X } from 'lucide-react'
 
 
 export const CreatePropertyForm = () => {
@@ -277,13 +278,13 @@ export const CreatePropertyForm = () => {
                             <div key={index} className="relative w-24 h-24">
                               <button
                                 type="button"
-                                className="absolute top-[-10] right-[-10] bg-primary-button text-white rounded-full w-6 h-6 flex items-center justify-center hover:cursor-pointer"
+                                className=" cursor-pointer absolute -top-2 -right-2 bg-white text-gray-500 hover:text-red-500 border border-gray-200 rounded-full w-6 h-6 flex items-center justify-center shadow-sm transition-colors z-10"
                                 onClick={() => {
                                   const updatedImages = field.value?.filter((_, i) => i !== index) || [];
                                   field.onChange(updatedImages);
                                 }}
                               >
-                                X
+                                <X size={14} />
                               </button>
                               <img 
                                 src={URL.createObjectURL(img)} 
@@ -298,7 +299,7 @@ export const CreatePropertyForm = () => {
                   )}
                 />
       
-                <Button type="submit" className='bg-primary-button hover:bg-primary-button-hover cursor-pointer'>Crear Propiedad</Button>
+                <Button type="submit" className='w-full bg-primary-base hover:bg-primary-hover text-white font-medium py-2 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer'>Crear Propiedad</Button>
 
 
               </form>

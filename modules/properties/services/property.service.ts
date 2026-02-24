@@ -6,6 +6,8 @@ import {
   Property,
   UpdatePropertyRequest,
 } from "../types/property.types";
+import { get } from "http";
+import { notFound } from "next/navigation";
 
 export const PropertyService = {
   getPropertiesList: async (): Promise<PaginatedResponse<Property>> => {
@@ -42,7 +44,7 @@ export const PropertyService = {
 
     return createdProperty;
   },
-  updateProperty: async (id: number,propertyData: UpdatePropertyRequest): Promise<Property> => {
+  updateProperty: async (slug: string,propertyData: UpdatePropertyRequest): Promise<Property> => {
     if (propertyData.images && propertyData.images.length > 4) {
       throw new Error("Máximo 4 imágenes permitidas");
     }
@@ -65,12 +67,10 @@ export const PropertyService = {
 
     if(keptImageIds && keptImageIds.length > 0) {
       formData.append("keptImageIds", JSON.stringify(keptImageIds));
-    } else {
-      formData.append("keptImageIds", "");
-    }
+    } 
 
     const { data: updatedProperty } = await api.put<Property>(
-      API_ENDPOINTS.PROPERTIES.UPDATE(id),
+      API_ENDPOINTS.PROPERTIES.UPDATE(slug),
       formData,
       {
         headers: {
@@ -81,7 +81,15 @@ export const PropertyService = {
 
     return updatedProperty;
   },
-  deleteProperty: async (id: number): Promise<void> => {
-    await api.delete(API_ENDPOINTS.PROPERTIES.DELETE(id));
+  deleteProperty: async (slug: string): Promise<void> => {
+    await api.delete(API_ENDPOINTS.PROPERTIES.DELETE(slug));
+  },
+  getPropertyBySlug: async (slug: string): Promise<Property | null> => {
+      try {
+        const { data } = await api.get<Property>(API_ENDPOINTS.PROPERTIES.BY_SLUG(slug)); 
+        return data;
+      } catch (error) {
+        return null;
+      }
     },
 };

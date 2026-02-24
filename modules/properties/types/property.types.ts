@@ -30,17 +30,15 @@ export interface Property {
     address: string;
     bedrooms: number;
     bathrooms: number;
+    slug: string;
     area: number;
     operationType: OperationType;
     propertyType: PropertyType;
     active: boolean;
     available: boolean;
     images: string[];
-    owner?: {
-        email: string;
-        firstName: string;
-        lastName: string;
-    }
+    ownerEmail: string;
+    ownerName: string;
 }
 
 export interface CreatePropertyRequest {

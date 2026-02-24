@@ -18,11 +18,11 @@ export const useProperties = () => {
     const isLoading = usePropertyStore((state) => state.isLoading);
 
     // HANDLER ACTUALIZAR PROPIEDAD
-    const handleUpdate = async (id: number, data: UpdatePropertyRequest) => {
+    const handleUpdate = async (slug: string, data: UpdatePropertyRequest) => {
         try {
-            await updatePropertyStore(id, data);
+            await updatePropertyStore(slug, data);
             toast.success("Propiedad actualizada exitosamente");
-            router.push(`${ROUTES.PROPERTIES.UPDATE}/${id}`); 
+            router.push(`${ROUTES.PROPERTIES.UPDATE}/${slug}`); 
             // TODO: Crear una ruta de detalle para mostrar la propiedad actualizada
         } catch (err) {
             toast.error(`Error actualizando la propiedad: ${err}`);
@@ -30,9 +30,9 @@ export const useProperties = () => {
     }
 
     // HANDLER ELIMINAR PROPIEDAD
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (slug: string) => {
         try {
-            await removePropertyStore(id);
+            await removePropertyStore(slug);
             toast.success("Propiedad eliminada exitosamente");
         } catch (err) {
             toast.error(`Error eliminando la propiedad: ${err}`);
@@ -43,8 +43,9 @@ export const useProperties = () => {
     const handleCreate = async (data: CreatePropertyRequest) => {
         try {
             const response = await addPropertyStore(data);
+            const slug = response.slug; // Obtener el slug de la propiedad creada
             toast.success("Propiedad creada exitosamente");
-            router.push(`${ROUTES.PROPERTIES.DETAIL}/${response.id}`); // Redirige a la lista de propiedades después de crear una nueva
+            router.push(`${ROUTES.PROPERTIES.DETAIL(slug)}`);
         } catch (err) {
             toast.error(`Error creando la propiedad: ${err}`);
         }
@@ -58,6 +59,8 @@ export const useProperties = () => {
             toast.error(`Error obteniendo las propiedades: ${err}`);
         }
     }
+
+  
 
     return { handleCreate, isLoading, handleUpdate, handleDelete, handleFetch };
 
