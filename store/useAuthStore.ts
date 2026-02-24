@@ -12,8 +12,11 @@ interface AuthState {
     isAuthenticated: boolean;
     // Acción para iniciar sesión
     login: (user:User, token:string) => void;
+    // el "_" indica que es una propiedad interna para controlar la hidratación del estado
     _hasHydrated: boolean;
     setHasHydrated: (state: boolean) => void;
+
+    
     // Acción para cerrar sesión
     logout: () => void;
 }

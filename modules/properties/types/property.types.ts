@@ -37,6 +37,7 @@ export interface Property {
     active: boolean;
     available: boolean;
     images: string[];
+    ownerId: number;
     ownerEmail: string;
     ownerName: string;
 }
