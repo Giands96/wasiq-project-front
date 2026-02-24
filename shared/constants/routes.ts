@@ -7,9 +7,10 @@ export const ROUTES = {
     },
     PROPERTIES: {
         LIST: '/properties',
-        DETAIL: (id:string) => `/properties/${id}`,
+        DETAIL: (slug:string) => `/properties/${slug}`,
         CREATE: '/properties/create',
-        UPDATE: (id:string) => `/properties/update/${id}`,
+        UPDATE: (slug:string) => `/properties/update/${slug}`,
+        DELETE: (slug:string) => `/properties/delete/${slug}`,
     },
     CONTACT: {
         US: '/contact',
@@ -26,9 +27,10 @@ export const API_ENDPOINTS = {
     PROPERTIES: {
         LIST: '/properties',
         CREATE: '/properties/create',
-        DETAIL: (id: number) => `/properties/${id}`,
-        UPDATE: (id: number) => `/properties/update/${id}`,
-        DELETE: (id: number) => `/properties/delete/${id}`,
+        UPDATE: (slug: string) => `/properties/update/${slug}`,
+        DELETE: (slug: string) => `/properties/delete/${slug}`,
+        BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
         GET_ALL: '/properties',
+        
     }
 };
