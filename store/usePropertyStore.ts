@@ -5,30 +5,51 @@ import { PropertyService } from "@/modules/properties/services/property.service"
 interface PropertyState {
   properties: Property[];
   isLoading: boolean;
-  // Cambiamos string por number para coincidir con el Long de Java
+  currentPage: number;
+  totalPages: number;
+  totalElements: number;
   fetchProperties: () => Promise<void>;
-  addProperty: (data: CreatePropertyRequest) => Promise<Property>; // Devuelve el ID de la propiedad creada
-  updateProperty: (id: number, data: UpdatePropertyRequest) => Promise<void>;
-  removeProperty: (id: number) => Promise<void>;
+  currentProperty: Property | null;
+  addProperty: (data: CreatePropertyRequest) => Promise<Property>;
+  updateProperty: (slug: string, data: UpdatePropertyRequest) => Promise<void>;
+  removeProperty: (slug: string) => Promise<void>;
+  fetchPropertySlug: (slug: string) => Promise<Property | null>;
 }
 
 export const usePropertyStore = create<PropertyState>((set, get) => ({
   properties: [],
   isLoading: false,
+  currentPage: 0,
+  totalPages: 0,
+  totalElements: 0,
+  currentProperty: null,
 
   // 1. OBTENER (FETCH)
   fetchProperties: async () => {
     set({ isLoading: true });
     try {
       const response = await PropertyService.getPropertiesList();
-      // La API devuelve una respuesta paginada, accedemos a .content
-      // se usa set({objeto}) para actualizar el estado
-      // y usamos set((state)) => para acceder al estado actual si necesitamos modificarlo
-      set({ properties: response.content });
+      set({ 
+        properties: response.content,
+        currentPage: response.number || 0,
+        totalPages: response.totalPages,
+        totalElements: response.totalElements
+      });
     } catch (error) {
       console.error("Error fetching properties", error);
     } finally {
       set({ isLoading: false });
+    }
+  },
+  
+  fetchPropertySlug: async (slug) => {
+    try {
+      const property = await PropertyService.getPropertyBySlug(slug);
+      set({ currentProperty: property });
+      return property;
+    } catch (error) {
+      console.error("Error fetching property by slug", error);
+      return null;
     }
   },
 
@@ -46,13 +67,13 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   },
 
   // 3. ACTUALIZAR (UPDATE)
-  updateProperty: async (id, updatedData) => {
+  updateProperty: async (slug, updatedData) => {
     set({ isLoading: true });
     try {
-      const updated = await PropertyService.updateProperty(id, updatedData);
-      // Mapeamos el array: si el ID coincide, reemplazamos con lo que devolvió el servidor
+      const updated = await PropertyService.updateProperty(slug, updatedData);
+      // Mapeamos el array: si el slug coincide, reemplazamos con lo que devolvió el servidor
       set((state) => ({
-        properties: state.properties.map((p) => (p.id === id ? updated : p)),
+        properties: state.properties.map((p) => (p.slug === slug ? updated : p)),
       }));
     } finally {
       set({ isLoading: false });
@@ -60,13 +81,13 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   },
 
   // 4. ELIMINAR (REMOVE)
-  removeProperty: async (id) => {
+  removeProperty: async (slug) => {
     set({ isLoading: true });
     try {
-      await PropertyService.deleteProperty(id);
+      await PropertyService.deleteProperty(slug);
       // Filtramos para quitarla del estado local
       set((state) => ({
-        properties: state.properties.filter((p) => p.id !== id),
+        properties: state.properties.filter((p) => p.slug !== slug),
       }));
     } finally {
       set({ isLoading: false });
