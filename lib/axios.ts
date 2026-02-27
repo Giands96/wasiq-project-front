@@ -30,7 +30,8 @@ api.interceptors.response.use(
       useAuthStore.getState().logout();
 
       if(typeof window !== 'undefined') {
-        window.location.href = ROUTES.HOME;
+        window.location.href = `${ROUTES.HOME}?expired=true`; // Redirige a la página de inicio de sesión con un mensaje de sesión expirada
+        
       }
 
     }
