@@ -16,6 +16,12 @@ export type PaginatedResponse<T> = {
     empty: boolean;
 }
 
+export interface PropertyPaginationParams {
+    page?: number;
+    size?: number;
+    sort?: string | string[];
+}
+
 
 export interface PropertyImage {
     id: number;
