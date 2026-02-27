@@ -4,17 +4,32 @@ import {
   CreatePropertyRequest,
   PaginatedResponse,
   Property,
+  PropertyPaginationParams,
   UpdatePropertyRequest,
 } from "../types/property.types";
-import { get } from "http";
-import { notFound } from "next/navigation";
 
 export const PropertyService = {
-  getPropertiesList: async (): Promise<PaginatedResponse<Property>> => {
+  getPropertiesList: async (
+    params?: PropertyPaginationParams,
+  ): Promise<PaginatedResponse<Property>> => {
     const { data } = await api.get<PaginatedResponse<Property>>(
       API_ENDPOINTS.PROPERTIES.LIST,
+      {
+        params,
+      },
     );
     return data;
+  },
+  getHomePreviewProperties: async (): Promise<Property[]> => {
+    const response = await PropertyService.getPropertiesList({
+      page: 0,
+      size: 4,
+      sort: "id,desc",
+    });
+
+    return [...response.content]
+      .sort((a, b) => b.id - a.id)
+      .slice(0, 4);
   },
   createProperty: async (propertyData: CreatePropertyRequest): Promise<Property> => {
     if (propertyData.images.length > 4) {
