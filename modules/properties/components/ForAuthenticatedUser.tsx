@@ -11,6 +11,8 @@ export const ForAuthenticatedUser: React.FC<ForAuthenticatedUserProps> = ({ phon
 
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
+    console.log('Is authenticated:', isAuthenticated);
+    console.log('Phone number:', phoneNumber);
 
     return(
         <>
