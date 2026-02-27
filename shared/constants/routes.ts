@@ -25,12 +25,11 @@ export const API_ENDPOINTS = {
         LOGOUT: '/auth/logout',
     },
     PROPERTIES: {
-        LIST: '/properties',
         CREATE: '/properties/create',
         UPDATE: (slug: string) => `/properties/update/${slug}`,
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
-        GET_ALL: '/properties',
+        GET_ALL: '/properties/',
         
     }
 };

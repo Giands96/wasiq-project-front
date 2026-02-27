@@ -13,7 +13,7 @@ export const PropertyService = {
     params?: PropertyPaginationParams,
   ): Promise<PaginatedResponse<Property>> => {
     const { data } = await api.get<PaginatedResponse<Property>>(
-      API_ENDPOINTS.PROPERTIES.LIST,
+      API_ENDPOINTS.PROPERTIES.GET_ALL,
       {
         params,
       },
