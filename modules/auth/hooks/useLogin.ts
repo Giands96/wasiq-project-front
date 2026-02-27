@@ -10,7 +10,7 @@ export const useLogin = () => {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const loginToStore = useAuthStore((state) => state.login);
+    const loginToStore = useAuthStore((state) => state.setAuth);
 
     const login = async (data: LoginFormValues) => {
         setIsLoading(true);
