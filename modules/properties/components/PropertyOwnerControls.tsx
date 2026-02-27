@@ -25,7 +25,6 @@ export const PropertyOwnerControls: FC<PropertyOwnerControlsProps> = ({ ownerId,
 
     if (!isOwner) {
         return null;
-    } else {
     }
 
     
