@@ -9,11 +9,19 @@ import Link from "next/link";
 import { Property } from "@/modules/properties/types/property.types";
 import { PropertyService } from "@/modules/properties/services/property.service";
 import { PropertyCard } from "@/modules/properties/components/PropertyCard";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+
+  // Estado para controlar la razón activa en la sección "Wasiq es..."
   const [activeReason, setActiveReason] = useState<number | null>(null);
   const [previewProperties, setPreviewProperties] = useState<Property[]>([]);
   const [isLoadingPreview, setIsLoadingPreview] = useState(true);
+  const searchParams = useSearchParams();
+  const isExpired = searchParams.get("expired") === "true";
+  const router = useRouter();
 
   const reasons = [
     {
@@ -43,6 +51,11 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    if(isExpired) {
+      toast.error("Tu sesión ha expirado. Por favor, inicia sesión nuevamente para continuar.");
+      router.replace(ROUTES.HOME);
+      return;
+    }
     const loadPreviewProperties = async () => {
       try {
         const data = await PropertyService.getHomePreviewProperties();
@@ -55,7 +68,7 @@ export default function Home() {
     };
 
     loadPreviewProperties();
-  }, []);
+  }, [isExpired, router]);
 
   return (
     <main className="w-full">
