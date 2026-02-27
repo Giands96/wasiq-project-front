@@ -160,9 +160,9 @@ export const LoginForm = () => {
                   {/* SIGN UP */}
                   <p className="text-center text-sm text-muted-foreground">
                     ¿No tienes cuenta?{" "}
-                    <span className="font-medium text-foreground cursor-pointer hover:underline">
-                      Regístrate
-                    </span>
+                    <Link href={ROUTES.AUTH.REGISTER} className="text-primary-button hover:underline">
+                      Regístrate aquí
+                    </Link>
                   </p>
 
                 </form>
