@@ -23,6 +23,9 @@ export interface LoginRequest {
 export interface RegisterRequest extends LoginRequest {
     firstName: string;
     lastName: string;
-    phone?: string;
+    email: string;
+    password: string;
+    phoneNumber: string;
     
+
 }
