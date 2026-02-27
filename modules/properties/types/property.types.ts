@@ -40,6 +40,7 @@ export interface Property {
     ownerId: number;
     ownerEmail: string;
     ownerName: string;
+    ownerPhoneNumber: string;
 }
 
 export interface CreatePropertyRequest {
