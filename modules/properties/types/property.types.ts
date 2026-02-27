@@ -46,7 +46,7 @@ export interface Property {
     ownerId: number;
     ownerEmail: string;
     ownerName: string;
-    ownerPhoneNumber: string;
+    ownerPhone: string;
 }
 
 export interface CreatePropertyRequest {
