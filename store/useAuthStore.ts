@@ -4,6 +4,7 @@ import { User } from "@/modules/auth/types/auth.types";
 
 // Definimos una interfaz para el estado de autenticación
 interface AuthState {
+    
     // El usuario autenticado o null si no hay ninguno
     user: User | null;
     // El token de autenticación o null si no hay ninguno
@@ -11,7 +12,7 @@ interface AuthState {
     // Indica si el usuario está autenticado
     isAuthenticated: boolean;
     // Acción para iniciar sesión
-    login: (user:User, token:string) => void;
+    setAuth: (user:User, token:string) => void;
     _hasHydrated: boolean;
     setHasHydrated: (state: boolean) => void;
     // Acción para cerrar sesión
@@ -28,9 +29,10 @@ export const useAuthStore = create<AuthState>()(
       _hasHydrated: false,
       setHasHydrated: (state) => set({ _hasHydrated: state }),
       //* login recoge user y token, y setea el estado correspondiente
-      login: (user, token) => set({ user, token, isAuthenticated: true }),
+      setAuth: (user, token) => set({ user, token, isAuthenticated: true }),
       logout: () => {
         set({ user: null, token: null, isAuthenticated: false });
+        localStorage.removeItem('wasiq-auth-storage');
       },
     }),
     {
