@@ -5,6 +5,7 @@ import { Home, Bed, Bath, Maximize, MapPin, Calendar, Mail, User, ExternalLink, 
 import Image from 'next/image';
 import { useAuthStore } from '@/store/useAuthStore';
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
+import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
 
 interface PropertyDetailsPageProps {
     params: {
@@ -17,6 +18,7 @@ interface PropertyDetailsPageProps {
 export default async function PropertyDetailsPage({ params }: PropertyDetailsPageProps) {
     const { slug } = await params;
     const property = await PropertyService.getPropertyBySlug(slug);
+    
 
     if (property == null) {
         return notFound();
@@ -206,6 +208,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                             </div>
                         
                             <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
+                            <ForAuthenticatedUser phoneNumber={property.ownerPhoneNumber} />
 
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${
