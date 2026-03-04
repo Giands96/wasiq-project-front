@@ -206,9 +206,9 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </div>
                                 </div>
                             </div>
-                        
-                            <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
                             <ForAuthenticatedUser phoneNumber={property.ownerPhone} />
+                            <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
+                            
 
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${
