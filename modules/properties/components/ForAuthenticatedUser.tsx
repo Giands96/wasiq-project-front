@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useAuthStore } from '@/store/useAuthStore';
+import { Phone } from 'lucide-react';
 
 interface ForAuthenticatedUserProps {
     phoneNumber: string;
@@ -17,12 +18,32 @@ export const ForAuthenticatedUser: React.FC<ForAuthenticatedUserProps> = ({ phon
     return(
         <>
             {isAuthenticated ? (
-                <div>
-                    Número de telefono: {phoneNumber}
+                <div className='space-y-3'>
+                                    <div className='flex items-center gap-3'>
+                                        <div className='p-2 bg-gray-100 rounded-lg'>
+                                            <Phone className='w-4 h-4 text-gray-600' />
+                                        </div>
+                                        <div>
+                                            <p className='text-sm text-gray-500'>Teléfono</p>
+                                            <a href={`tel:${phoneNumber}`} className='font-medium '>
+                                                {phoneNumber}
+                                            </a>
+                                        </div>
+                                    </div>
                 </div>
             ) : (
-                <div className='bg-neutral-400 text-neutral-700'>
-                    <span>Solo usuarios autenticados pueden ver esta información</span>
+                <div className=' text-neutral-700'>
+                    <div className='flex items-center gap-3'>
+                        <div className='p-2 bg-gray-100 rounded-lg'>
+                                <Phone className='w-4 h-4 text-gray-600' />
+                            </div>
+                            <div>
+                                 <p className='text-sm text-gray-500'>Teléfono</p>
+                                <span className='text-gray-400'>
+                                    Inicia sesión para ver el número de contacto
+                                </span>
+                        </div>
+                    </div>
                 </div>
             )}
         </>
