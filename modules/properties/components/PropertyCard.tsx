@@ -30,10 +30,21 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
-
+      
       <div className="absolute inset-x-0 bottom-0 flex flex-col p-6">
-        
+          <div className="my-2">
+            <span className="text-white bg-white/20 backdrop-blur-md px-2 py-1 text-xs font-bold rounded-lg border border-white/30">
+              {property.propertyType === "HOUSE"
+                ? "CASA"
+                : property.propertyType === "APARTMENT"
+                ? "DEPARTAMENTO"
+                : property.propertyType === "LAND"
+                ? "TERRENO"
+                : "PROPIEDAD"}
+            </span>
+          </div>
         <div className="mb-2 flex items-start justify-between gap-4">
+          
           <h3 className="line-clamp-2 text-xl font-bold text-white leading-tight">
             {property.title}
           </h3>
