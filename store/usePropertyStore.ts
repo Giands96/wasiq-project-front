@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Property, CreatePropertyRequest, UpdatePropertyRequest } from "@/modules/properties/types/property.types";
+import { Property, CreatePropertyRequest, PropertyPaginationParams, UpdatePropertyRequest } from "@/modules/properties/types/property.types";
 import { PropertyService } from "@/modules/properties/services/property.service"; // 👈 Importa tu servicio
 import { toast } from "sonner";
 
@@ -9,7 +9,7 @@ interface PropertyState {
   currentPage: number;
   totalPages: number;
   totalElements: number;
-  fetchProperties: () => Promise<void>;
+  fetchProperties: (params?: PropertyPaginationParams) => Promise<void>;
   currentProperty: Property | null;
   addProperty: (data: CreatePropertyRequest) => Promise<Property>;
   updateProperty: (slug: string, data: UpdatePropertyRequest) => Promise<void>;
@@ -27,10 +27,10 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   currentProperty: null,
 
   // 1. OBTENER (FETCH)
-  fetchProperties: async () => {
+  fetchProperties: async (params) => {
     set({ isLoading: true });
     try {
-      const response = await PropertyService.getPropertiesList();
+      const response = await PropertyService.getPropertiesList(params);
       set({ 
         properties: response.content,
         currentPage: response.number || 0,
