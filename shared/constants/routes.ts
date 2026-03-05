@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
         GET_ALL: '/properties/',
+        SEARCH: (query: string) => `/properties/search?query=${encodeURIComponent(query)}`,
         
     }
 };
