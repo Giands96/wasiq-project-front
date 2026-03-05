@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PropertyCard } from "@/modules/properties/components/PropertyCard";
 import { PropertyService } from "@/modules/properties/services/property.service";
 import { Property } from "@/modules/properties/types/property.types";
+import FiltersControls from "@/modules/properties/components/FiltersControls";
 
 const PAGE_SIZE = 9;
 
@@ -52,23 +53,7 @@ export default function PropertiesPage() {
         </header>
 
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-          <aside className="rounded-2xl border border-border-light bg-bg-card p-5 lg:col-span-3 lg:h-fit">
-            <h2 className="mb-4 text-lg font-semibold text-text-primary">Filtros</h2>
-            <div className="space-y-3">
-              <button className="w-full rounded-md border border-border-light bg-beige px-4 py-2.5 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark">
-                Tipo de propiedad
-              </button>
-              <button className="w-full rounded-md border border-border-light bg-beige px-4 py-2.5 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark">
-                Tipo de operación
-              </button>
-              <button className="w-full rounded-md border border-border-light bg-beige px-4 py-2.5 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark">
-                Rango de precio
-              </button>
-              <button className="w-full rounded-md border border-border-light bg-beige px-4 py-2.5 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark">
-                Habitaciones
-              </button>
-            </div>
-          </aside>
+          <FiltersControls/>
 
           <div className="lg:col-span-9">
             {isLoading ? (
