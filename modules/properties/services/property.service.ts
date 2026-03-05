@@ -104,18 +104,18 @@ export const PropertyService = {
       try {
         const { data } = await api.get<Property>(API_ENDPOINTS.PROPERTIES.BY_SLUG(slug)); 
         return data;
-      } catch (error) {
+      } catch {
         return null;
       }
     },
   getPropertyByTitle: async (params?: PropertyPaginationParams & {query?: string}): Promise<PaginatedResponse<Property>> => {
     try {
       const { data } = await api.get<PaginatedResponse<Property>>(
-        API_ENDPOINTS.PROPERTIES.SEARCH(params?.query || ""),
-        {params: params}
+        API_ENDPOINTS.PROPERTIES.GET_ALL,
+        { params }
       );
       return data;
-    } catch (error) {
+    } catch {
       return {
         content: [],
         totalPages: 0,
