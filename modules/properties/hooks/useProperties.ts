@@ -12,6 +12,7 @@ export const useProperties = () => {
     const updatePropertyStore = usePropertyStore((state) => state.updateProperty);
     const removePropertyStore = usePropertyStore((state) => state.removeProperty);
     const fetchPropertiesStore = usePropertyStore((state) => state.fetchProperties);
+    const searchByTitleStore = usePropertyStore((state) => state.searchByTitle);
 
     // INSTANCIAR EL ROUTER
     const router = useRouter();
@@ -60,9 +61,17 @@ export const useProperties = () => {
         }
     }
 
+    const handleSearchByTitle = async (query: string) => {
+        try {
+            await searchByTitleStore(query);
+        } catch (err) {
+            toast.error(`No se encontraron propiedades con el nombre "${query}"`);
+        }
+    }
+
   
 
-    return { handleCreate, isLoading, handleUpdate, handleDelete, handleFetch };
+    return { handleCreate, isLoading, handleUpdate, handleDelete, handleFetch, handleSearchByTitle };
 
     
 
