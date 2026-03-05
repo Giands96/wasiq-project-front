@@ -1,48 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/modules/properties/components/PropertyCard";
-import { PropertyService } from "@/modules/properties/services/property.service";
-import { Property } from "@/modules/properties/types/property.types";
 import FiltersControls from "@/modules/properties/components/FiltersControls";
-
-const PAGE_SIZE = 9;
+import { usePropertyStore } from "@/store/usePropertyStore"; 
 
 export default function PropertiesPage() {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  //URL
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
 
+  // Extraer todo directamente de Zustand
+  const { 
+    properties, 
+    isLoading, 
+    currentPage, 
+    totalPages, 
+    fetchProperties, 
+    searchByTitle 
+  } = usePropertyStore();
+
+  // El componente reacciona a la URL y le avisa a Zustand qué buscar
   useEffect(() => {
-    const loadProperties = async () => {
-      setIsLoading(true);
-      try {
-        const response = await PropertyService.getPropertiesList({
-          page: currentPage,
-          size: PAGE_SIZE,
-          sort: "id,desc",
-        });
-        setProperties(response.content);
-        setTotalPages(response.totalPages);
-      } catch (error) {
-        setProperties([]);
-        setTotalPages(0);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProperties();
-  }, [currentPage]);
-
-  const goToPreviousPage = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 0));
-  };
-
-  const goToNextPage = () => {
-    setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev));
-  };
+    if (query) {
+      searchByTitle(query);
+    } else {
+      fetchProperties();
+    }
+  }, [query]); 
 
   return (
     <main className="min-h-screen bg-bg-main py-12 sm:py-16">
@@ -56,9 +42,10 @@ export default function PropertiesPage() {
           <FiltersControls/>
 
           <div className="lg:col-span-9">
+            {/* Usamos el isLoading de Zustand directamente */}
             {isLoading ? (
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {Array.from({ length: PAGE_SIZE }).map((_, index) => (
+                {Array.from({ length: 9 }).map((_, index) => (
                   <div
                     key={index}
                     className="h-96 animate-pulse rounded-2xl border border-border-light bg-beige"
@@ -73,9 +60,10 @@ export default function PropertiesPage() {
                   ))}
                 </div>
 
+                {/* Controles de Paginación */}
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <button
-                    onClick={goToPreviousPage}
+                    // onClick={goToPreviousPage} <-- Temporalmente desactivado
                     disabled={currentPage === 0}
                     className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
                   >
@@ -87,7 +75,7 @@ export default function PropertiesPage() {
                   </span>
 
                   <button
-                    onClick={goToNextPage}
+                    // onClick={goToNextPage} <-- Temporalmente desactivado
                     disabled={currentPage + 1 >= totalPages}
                     className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
                   >
@@ -97,7 +85,7 @@ export default function PropertiesPage() {
               </>
             ) : (
               <div className="rounded-2xl border border-border-light bg-bg-card p-8 text-center text-text-secondary">
-                No se encontraron propiedades por ahora.
+                No se encontraron propiedades con la búsqueda &quot;{query}&quot;.
               </div>
             )}
           </div>
