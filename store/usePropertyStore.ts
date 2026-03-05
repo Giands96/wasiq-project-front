@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { Property, CreatePropertyRequest, UpdatePropertyRequest } from "@/modules/properties/types/property.types";
 import { PropertyService } from "@/modules/properties/services/property.service"; // 👈 Importa tu servicio
+import { toast } from "sonner";
 
 interface PropertyState {
   properties: Property[];
@@ -14,6 +15,7 @@ interface PropertyState {
   updateProperty: (slug: string, data: UpdatePropertyRequest) => Promise<void>;
   removeProperty: (slug: string) => Promise<void>;
   fetchPropertySlug: (slug: string) => Promise<Property | null>;
+  searchByTitle: (query: string) => Promise<void>;
 }
 
 export const usePropertyStore = create<PropertyState>((set, get) => ({
@@ -93,4 +95,22 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
       set({ isLoading: false });
     }
   },
+  /* BUSCAR POR TITULO */ 
+  searchByTitle: async (query:string) => {
+    set({ isLoading: true });
+    try {
+      const response = await PropertyService.getPropertyByTitle({query});
+      set({ 
+        properties: response.content,
+        currentPage: response.number || 0,
+        totalPages: response.totalPages,
+        totalElements: response.totalElements
+      });
+    } catch (error) {
+      toast.error(`Error buscando propiedades: ${error}`);
+    } finally {
+      set({ isLoading: false });
+    }
+  }
+
 }));
