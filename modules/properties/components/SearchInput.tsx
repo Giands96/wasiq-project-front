@@ -1,16 +1,27 @@
-import React from "react";
+import { useEffect } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useProperties } from "../hooks/useProperties";
 import { Button } from "@/shared/components/ui/button";
+import { useSearchParams } from "next/navigation";
+
+type SearchFormValues = {
+  query: string;
+};
 
 function SearchInput() {
   const { handleSearchByTitle } = useProperties();
-  const { register, handleSubmit } = useForm({
+  const searchParams = useSearchParams();
+  const { register, handleSubmit, setValue } = useForm<SearchFormValues>({
     defaultValues: { query: "" },
   });
+  const queryFromUrl = searchParams.get("query") ?? "";
 
-  const onSubmit = (data: { query: string }) => {
+  useEffect(() => {
+    setValue("query", queryFromUrl, { shouldDirty: false, shouldTouch: false });
+  }, [queryFromUrl, setValue]);
+
+  const onSubmit = (data: SearchFormValues) => {
     handleSearchByTitle(data.query);
   };
 
