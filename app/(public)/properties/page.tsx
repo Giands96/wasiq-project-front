@@ -5,6 +5,13 @@ import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/modules/properties/components/PropertyCard";
 import FiltersControls from "@/modules/properties/components/FiltersControls";
 import { usePropertyStore } from "@/store/usePropertyStore"; 
+import { PropertyPaginationParams } from "@/modules/properties/types/property.types";
+
+const parseNumber = (value: string | null): number | undefined => {
+  if (value === null || value.trim() === "") return undefined;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+};
 
 export default function PropertiesPage() {
   //URL
@@ -17,18 +24,25 @@ export default function PropertiesPage() {
     isLoading, 
     currentPage, 
     totalPages, 
-    fetchProperties, 
-    searchByTitle 
+    fetchProperties
   } = usePropertyStore();
 
   // El componente reacciona a la URL y le avisa a Zustand qué buscar
   useEffect(() => {
-    if (query) {
-      searchByTitle(query);
-    } else {
-      fetchProperties();
-    }
-  }, [query]); 
+    const params: PropertyPaginationParams = {
+      query: searchParams.get("query") || undefined,
+      propertyType: searchParams.get("propertyType") || undefined,
+      operationType: searchParams.get("operationType") || undefined,
+      minPrice: parseNumber(searchParams.get("minPrice")),
+      maxPrice: parseNumber(searchParams.get("maxPrice")),
+      rooms: parseNumber(searchParams.get("rooms")),
+      bathrooms: parseNumber(searchParams.get("bathrooms")),
+      page: parseNumber(searchParams.get("page")),
+      size: parseNumber(searchParams.get("size")),
+    };
+
+    fetchProperties(params);
+  }, [searchParams, fetchProperties]); 
 
   return (
     <main className="min-h-screen bg-bg-main py-12 sm:py-16">
