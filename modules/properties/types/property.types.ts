@@ -20,6 +20,13 @@ export interface PropertyPaginationParams {
     page?: number;
     size?: number;
     sort?: string | string[];
+    query?: string;
+    propertyType?: string;
+    operationType?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    rooms?: number;
+    bathrooms?: number;
 }
 
 
