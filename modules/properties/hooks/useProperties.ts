@@ -1,7 +1,7 @@
 import { usePropertyStore } from "@/store/usePropertyStore";
-import { CreatePropertyRequest,UpdatePropertyRequest } from "@/modules/properties/types/property.types";
+import { CreatePropertyRequest, PropertyPaginationParams, UpdatePropertyRequest } from "@/modules/properties/types/property.types";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/shared/constants/routes";
 
 
@@ -15,6 +15,7 @@ export const useProperties = () => {
 
     // INSTANCIAR EL ROUTER
     const router = useRouter();
+    const searchParams = useSearchParams();
     const isLoading = usePropertyStore((state) => state.isLoading);
 
     // HANDLER ACTUALIZAR PROPIEDAD
@@ -52,9 +53,9 @@ export const useProperties = () => {
     }
 
     // HANDLER OBTENER PROPIEDADES
-    const handleFetch = async () => {
+    const handleFetch = async (params?: PropertyPaginationParams) => {
         try {
-            await fetchPropertiesStore();
+            await fetchPropertiesStore(params);
         } catch (err) {
             toast.error(`Error obteniendo las propiedades: ${err}`);
         }
@@ -64,11 +65,16 @@ export const useProperties = () => {
         try {
             const normalizedQuery = query.trim();
             if (!normalizedQuery) {
-                router.push(ROUTES.PROPERTIES.LIST);
+                const nextParams = new URLSearchParams(searchParams.toString());
+                nextParams.delete("query");
+                const queryString = nextParams.toString();
+                router.push(queryString ? `${ROUTES.PROPERTIES.LIST}?${queryString}` : ROUTES.PROPERTIES.LIST);
                 return;
             }
 
-            router.push(`${ROUTES.PROPERTIES.SEARCH(normalizedQuery)}`);
+            const nextParams = new URLSearchParams(searchParams.toString());
+            nextParams.set("query", normalizedQuery);
+            router.push(`${ROUTES.PROPERTIES.LIST}?${nextParams.toString()}`);
         } catch {
             toast.error(`No se encontraron propiedades con el nombre "${query}"`);
         }
