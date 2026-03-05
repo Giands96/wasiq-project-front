@@ -54,12 +54,7 @@ export default function About() {
             </h2>
             <p className="text-base sm:text-lg text-text-secondary leading-relaxed mb-6">
               Somos un portal web inmobiliario que conecta a personas con propiedades 
-              de valor real. No somos una inmobiliaria tradicional: somos tu puerta de 
-              acceso a oportunidades verificadas, donde la tecnología y el acompañamiento 
-              humano se unen para que encuentres tu próximo espacio con total confianza.
-            </p>
-            <p className="text-base sm:text-lg text-text-secondary leading-relaxed">
-              Explora, compara y decide con toda la información que necesitas, respaldada 
+              de valor real. Explora, compara y decide con toda la información que necesitas, respaldada 
               por un equipo comprometido con tu tranquilidad.
             </p>
           </div>
