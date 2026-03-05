@@ -8,6 +8,7 @@ import {
   UpdatePropertyRequest,
 } from "../types/property.types";
 
+
 export const PropertyService = {
   getPropertiesList: async (
     params?: PropertyPaginationParams,
@@ -107,4 +108,25 @@ export const PropertyService = {
         return null;
       }
     },
+  getPropertyByTitle: async (params?: PropertyPaginationParams & {query?: string}): Promise<PaginatedResponse<Property>> => {
+    try {
+      const { data } = await api.get<PaginatedResponse<Property>>(
+        API_ENDPOINTS.PROPERTIES.SEARCH(params?.query || ""),
+        {params: params}
+      );
+      return data;
+    } catch (error) {
+      return {
+        content: [],
+        totalPages: 0,
+        totalElements: 0,
+        size: params?.size || 10,
+        number: params?.page || 0,
+        first: true,
+        last: true,
+        empty: true
+      };
+    }
+  }
+
 };
