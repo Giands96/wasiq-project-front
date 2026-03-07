@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useAuthStore } from '@/store/useAuthStore';
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
+import { is } from 'zod/locales';
 
 interface PropertyDetailsPageProps {
     params: {
@@ -31,8 +32,6 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
         currency: 'PEN',
         minimumFractionDigits: 0
     }).format(property.price);
-
-    console.log('Property details:', property);
 
     return (
         <div className='bg-gray-50 min-h-screen'>
@@ -131,7 +130,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </div>
                                     <div>
                                         <p className='text-sm text-gray-500'>Tipo</p>
-                                        <p className='font-semibold text-gray-900'>{property.propertyType}</p>
+                                        <p className='font-semibold text-gray-900'>{property.propertyType === "HOUSE" ? "CASA" : property.propertyType === "APARTMENT" ? "DEPARTAMENTO" : property.propertyType === "LAND" ? "TERRENO" : "PROPIEDAD"}</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +149,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                             <div className='mt-6 grid grid-cols-2 gap-4'>
                                 <div className='p-4 bg-gray-50 rounded-lg'>
                                     <p className='text-sm text-gray-500 mb-1'>Tipo de Operación</p>
-                                    <p className='font-semibold text-gray-900'>{property.operationType}</p>
+                                    <p className='font-semibold text-gray-900'>{property.operationType === "SALE" ? "Venta" : "Alquiler"}</p>
                                 </div>
                                 <div className='p-4 bg-gray-50 rounded-lg'>
                                     <p className='text-sm text-gray-500 mb-1'>Estado</p>
@@ -193,20 +192,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                             <p className='font-medium text-gray-900'>{property.ownerName}</p>
                                         </div>
                                     </div>
-                                    <div className='flex items-center gap-3'>
-                                        <div className='p-2 bg-gray-100 rounded-lg'>
-                                            <Mail className='w-4 h-4 text-gray-600' />
-                                        </div>
-                                        <div>
-                                            <p className='text-sm text-gray-500'>Email</p>
-                                            <a href={`mailto:${property.ownerEmail}`} className='font-medium text-blue-600 hover:underline'>
-                                                {property.ownerEmail}
-                                            </a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
-                            <ForAuthenticatedUser phoneNumber={property.ownerPhone} />
+                            <ForAuthenticatedUser phoneNumber={property.ownerPhone} ownerEmail={property.ownerEmail} />
                             <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
                             
 
