@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ROUTES } from '@/shared/constants/routes';
-
+// Función para extraer el path de una URL, manejando casos con o sin base URL
 const getRequestPath = (url?: string): string => {
   if (!url) return '';
   try {
@@ -11,6 +11,7 @@ const getRequestPath = (url?: string): string => {
   }
 };
 
+// Función para determinar si una solicitud es una lectura pública de propiedades
 const isPublicPropertiesReadRequest = (url?: string, method?: string): boolean => {
   if ((method ?? 'get').toLowerCase() !== 'get') return false;
   const path = getRequestPath(url);
