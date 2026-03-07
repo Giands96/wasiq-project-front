@@ -20,7 +20,7 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
   const imageSrc = property.images?.[0] || bgHome;
 
   return (
-    <article className="group relative h-[400px] w-full overflow-hidden rounded-2xl shadow-sm transition-all duration-500 hover:shadow-xl cursor-pointer">
+    <Link href={ROUTES.PROPERTIES.DETAIL(property.slug)} className="group relative h-[400px] w-full overflow-hidden rounded-2xl shadow-sm transition-all duration-500 hover:shadow-xl cursor-pointer">
       <Image
         src={imageSrc}
         alt={property.title}
@@ -59,14 +59,13 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
         </p>
 
 
-        <Link
-          href={ROUTES.PROPERTIES.DETAIL(property.slug)}
-          className="flex w-full items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm border border-white/30 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black"
+        <button
+          className="flex hover:cursor-pointer w-full items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm border border-white/30 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black"
         >
           Ver propiedad
-        </Link>
+        </button>
       </div>
 
-    </article>
+    </Link>
   );
 };
