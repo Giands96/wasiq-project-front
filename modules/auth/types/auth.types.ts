@@ -29,3 +29,12 @@ export interface RegisterRequest extends LoginRequest {
     
 
 }
+
+export interface UpdateProfileRequest {
+    phone: string;
+    password?: string;
+}
+
+export interface UpdateProfileResponse {
+    user: User;
+}
