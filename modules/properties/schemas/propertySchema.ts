@@ -10,7 +10,9 @@ export const propertySchema = z.object({
     price: z.number().positive("El precio debe ser mayor a 0"),
     address: z.string().min(15, "La dirección debe tener al menos 15 caracteres").max(200, "La dirección no puede exceder los 200 caracteres"),
     bedrooms: z.number().int().positive("El número de habitaciones debe ser un entero positivo"),
-    images: z.array(z.instanceof(File).refine(file => file.size <= 4 * 1024 * 1024, "Cada imagen debe ser menor a 4MB")).max(4, "No puedes subir más de 4 imágenes"),
+    images: z.array(z.instanceof(File).refine(file => file.size <= 4 * 1024 * 1024, "Cada imagen debe ser menor a 4MB")).max(4, "No puedes subir más de 4 imágenes").optional(),
+    keptImageIds: z.array(z.number()).optional(), // IDs de imágenes que deben mantenerse al actualizar
+    legacyImageKeys: z.array(z.string()).optional(), // Claves de imágenes antiguas sin ID que se eliminaron
     bathrooms: z.number().int().positive("El número de baños debe ser un entero positivo"),
     area: z.number().positive("El área debe ser un número positivo"),
     propertyType: z.enum(PROPERTY_TYPES, {error: "Tipo de propiedad no válido"}),
