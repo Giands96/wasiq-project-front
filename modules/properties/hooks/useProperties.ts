@@ -12,7 +12,8 @@ export const useProperties = () => {
     const updatePropertyStore = usePropertyStore((state) => state.updateProperty);
     const removePropertyStore = usePropertyStore((state) => state.removeProperty);
     const fetchPropertiesStore = usePropertyStore((state) => state.fetchProperties);
-
+    const fetchPropertyBySlugStore = usePropertyStore((state) => state.fetchPropertySlug);
+    const currentProperty = usePropertyStore((state) => state.currentProperty);
     // INSTANCIAR EL ROUTER
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -23,7 +24,7 @@ export const useProperties = () => {
         try {
             await updatePropertyStore(slug, data);
             toast.success("Propiedad actualizada exitosamente");
-            router.push(`${ROUTES.PROPERTIES.UPDATE}/${slug}`); 
+            router.push(ROUTES.PROPERTIES.DETAIL(slug)); 
             // TODO: Crear una ruta de detalle para mostrar la propiedad actualizada
         } catch (err) {
             toast.error(`Error actualizando la propiedad: ${err}`);
@@ -82,7 +83,7 @@ export const useProperties = () => {
 
   
 
-    return { handleCreate, isLoading, handleUpdate, handleDelete, handleFetch, handleSearchByTitle };
+    return { handleCreate, isLoading, handleUpdate, handleDelete, handleFetch, handleSearchByTitle, fetchPropertyBySlug: fetchPropertyBySlugStore, currentProperty };
 
     
 
