@@ -17,7 +17,9 @@ const formatPrice = (price: number) => {
 };
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
-  const imageSrc = property.images?.[0] || bgHome;
+  const firstImage = property.images?.[0];
+  const resolvedImage = typeof firstImage === "string" ? firstImage : firstImage?.url;
+  const imageSrc = resolvedImage && resolvedImage.trim().length > 0 ? resolvedImage : bgHome;
 
   return (
     <Link href={ROUTES.PROPERTIES.DETAIL(property.slug)} className="group relative h-[400px] w-full overflow-hidden rounded-2xl shadow-sm transition-all duration-500 hover:shadow-xl cursor-pointer">
