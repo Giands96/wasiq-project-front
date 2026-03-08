@@ -43,8 +43,10 @@ const UserMenu = () => {
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">
-            <User className="mr-2 h-4 w-4" /> Perfil
+          <DropdownMenuItem asChild className="cursor-pointer">
+            <Link href={ROUTES.AUTH.MY_PROFILE}>
+              <User className="mr-2 h-4 w-4" /> Perfil
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" /> Configuración
