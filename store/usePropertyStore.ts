@@ -26,7 +26,7 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
   totalElements: 0,
   currentProperty: null,
 
-  // 1. OBTENER (FETCH)
+  // 1. OBTENER LISTA DE PROPIEDADES (FETCH)
   fetchProperties: async (params) => {
     set({ isLoading: true });
     try {
@@ -43,7 +43,7 @@ export const usePropertyStore = create<PropertyState>((set, get) => ({
       set({ isLoading: false });
     }
   },
-  
+  // OBTENER PROPIEDAD POR SLUG
   fetchPropertySlug: async (slug) => {
     try {
       const property = await PropertyService.getPropertyBySlug(slug);
