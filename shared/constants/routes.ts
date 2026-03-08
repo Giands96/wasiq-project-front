@@ -4,6 +4,7 @@ export const ROUTES = {
         LOGIN: '/login',
         REGISTER: '/register',
         LOGOUT: '/logout',
+        MY_PROFILE: '/my-profile',
     },
     PROPERTIES: {
         LIST: '/properties',
@@ -25,6 +26,7 @@ export const API_ENDPOINTS = {
         LOGIN: '/auth/login',    
         REGISTER: '/auth/register',
         LOGOUT: '/auth/logout',
+        PROFILE: '/auth/profile',
     },
     PROPERTIES: {
         CREATE: '/properties/create',
