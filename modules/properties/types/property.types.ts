@@ -49,7 +49,7 @@ export interface Property {
     propertyType: PropertyType;
     active: boolean;
     available: boolean;
-    images: string[];
+    images: Array<PropertyImage | string>;
     ownerId: number;
     ownerEmail: string;
     ownerName: string;
