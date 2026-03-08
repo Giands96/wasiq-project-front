@@ -1,12 +1,9 @@
 import { PropertyService } from '@/modules/properties/services/property.service';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { Home, Bed, Bath, Maximize, MapPin, Calendar, Mail, User, ExternalLink, Share2, Heart } from 'lucide-react';
-import Image from 'next/image';
-import { useAuthStore } from '@/store/useAuthStore';
+import { Home, Bed, Bath, Maximize, MapPin, User, ExternalLink, Share2, Heart } from 'lucide-react';
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
-import { is } from 'zod/locales';
 
 interface PropertyDetailsPageProps {
     params: {
@@ -33,6 +30,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
         minimumFractionDigits: 0
     }).format(property.price);
 
+    const normalizedImages = (property.images ?? [])
+        .map((image) => (typeof image === 'string' ? image : image?.url))
+        .filter((url): url is string => Boolean(url && url.trim().length > 0));
+
     return (
         <div className='bg-gray-50 min-h-screen'>
             <div className='container mx-auto p-4 md:p-6 lg:p-8'>
@@ -41,19 +42,18 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                     <div className='lg:col-span-2 space-y-6'>
                         {/* Galería de imágenes */}
                         <div className='bg-white rounded-lg overflow-hidden shadow-sm'>
-                            {property.images && property.images.length > 0 ? (
+                            {normalizedImages.length > 0 ? (
                                 <div className='grid grid-cols-2 gap-2 p-2'>
                                     {/* Imagen principal */}
                                     <div className='col-span-2 relative h-96'>
                                         <img
-                                            src={property.images[0]}
+                                            src={normalizedImages[0]}
                                             alt={property.title}
                                             className='object-cover rounded-lg w-full h-full'
-                                            
                                         />
                                     </div>
                                     {/* Imágenes secundarias */}
-                                    {property.images.slice(1, 4).map((image, index) => (
+                                    {normalizedImages.slice(1, 4).map((image, index) => (
                                         <div key={index} className='relative h-48'>
                                             <img
                                                 src={image}
