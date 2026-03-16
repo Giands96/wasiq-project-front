@@ -5,7 +5,7 @@ import Link from 'next/link';
 function Hero() {
   return (
     <section className="w-full px-6 py-6">
-      <div className="relative w-full h-[70vh] lg:h-[85vh] rounded-4xl overflow-hidden">
+      <div className="relative w-full h-[70vh] lg:h-[85vh] rounded-4xl overflow-hidden animate-fade-in-up animate-duration-1000">
         
         {/* Imagen */}
         <img
