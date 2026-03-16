@@ -35,6 +35,7 @@ export default function MyProfilePage() {
   const router = useRouter();
   const { user, token, isAuthenticated, _hasHydrated, setAuth } = useAuthStore();
   const [isSaving, setIsSaving] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const form = useForm<MyProfileFormValues>({
     resolver: zodResolver(myProfileSchema),
@@ -68,7 +69,9 @@ export default function MyProfilePage() {
   const watchedPassword = form.watch("password");
 
   const hasChanges = useMemo(() => {
+    // Verificar si el número de teléfono ha cambiado o si se ha ingresado una nueva contraseña
     const phoneChanged = (user?.phone ?? "") !== watchedPhone;
+    // Consideramos que si el campo de contraseña tiene algún valor, el usuario desea cambiarla
     const passwordChanged = Boolean(watchedPassword && watchedPassword.length > 0);
     return phoneChanged || passwordChanged;
   }, [user?.phone, watchedPhone, watchedPassword]);
@@ -114,9 +117,22 @@ export default function MyProfilePage() {
     <div className="min-h-screen p-4 md:p-8 bg-linear-to-tr from-beige to-orange-500/4">
       <Card className="max-w-3xl mx-auto shadow-sm border-neutral-200">
         <CardHeader>
-          <CardTitle className="text-2xl">Mi perfil</CardTitle>
+          <CardTitle className="text-2xl">
+            <div className="flex justify-between">
+              <span>{isEditing? "Editar" : "Mi"} Perfil</span>
+              {!isEditing && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Editar
+                </Button>
+              )}
+            </div>
+            </CardTitle>
           <CardDescription>
-            Puedes actualizar tu numero y contrasena. Nombre, apellido y correo son solo lectura.
+            Puedes actualizar tu numero y contraseña. Nombre, apellido y correo son solo lectura.
           </CardDescription>
         </CardHeader>
 
@@ -174,7 +190,7 @@ export default function MyProfilePage() {
                   <FormItem>
                     <FormLabel>Numero de celular</FormLabel>
                     <FormControl>
-                      <Input placeholder="999999999" {...field} />
+                      <Input { ...(isEditing ? {} : { readOnly: true, disabled: true }) } placeholder="999999999" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -186,7 +202,7 @@ export default function MyProfilePage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nueva contrasena</FormLabel>
+                    <FormLabel>Nueva contraseña</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -213,6 +229,17 @@ export default function MyProfilePage() {
               >
                 {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {isSaving ? "Guardando cambios..." : "Guardar cambios"}
+              </Button>
+              <Button
+                className="w-full md:w-auto lg:ml-4 md:ml-2"
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  setIsEditing(false);
+                  form.reset();
+                }}
+                >
+                Cancelar edición
               </Button>
             </form>
           </Form>
