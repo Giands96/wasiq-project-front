@@ -27,6 +27,7 @@ export const API_ENDPOINTS = {
         REGISTER: '/auth/register',
         LOGOUT: '/auth/logout',
         PROFILE: '/auth/profile',
+        UPDATE_PROFILE: (id: number) => `/auth/profile/update/${id}`,
     },
     PROPERTIES: {
         CREATE: '/properties/create',
