@@ -8,12 +8,12 @@ export const ROUTES = {
     },
     PROPERTIES: {
         LIST: '/properties',
-        DETAIL: (slug:string) => `/properties/${slug}`,
+        DETAIL: (slug: string) => `/properties/${slug}`,
         CREATE: '/properties/create',
-        UPDATE: (slug:string) => `/properties/update/${slug}`,
-        DELETE: (slug:string) => `/properties/delete/${slug}`,
-        SEARCH: (query:string) => `/properties?query=${encodeURIComponent(query)}`,
-        
+        UPDATE: (slug: string) => `/properties/update/${slug}`,
+        DELETE: (slug: string) => `/properties/delete/${slug}`,
+        SEARCH: (query: string) => `/properties?query=${encodeURIComponent(query)}`,
+
     },
     CONTACT: {
         US: '/contact',
@@ -23,7 +23,7 @@ export const ROUTES = {
 
 export const API_ENDPOINTS = {
     AUTH: {
-        LOGIN: '/auth/login',    
+        LOGIN: '/auth/login',
         REGISTER: '/auth/register',
         LOGOUT: '/auth/logout',
         PROFILE: '/auth/profile',
@@ -35,7 +35,7 @@ export const API_ENDPOINTS = {
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
         GET_ALL: '/properties/',
-        
-        
+
+
     }
 };

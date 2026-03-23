@@ -1,8 +1,12 @@
 import api from '@/lib/axios';
-import {API_ENDPOINTS} from '@/shared/constants/routes';
+import { API_ENDPOINTS } from '@/shared/constants/routes';
 import { AxiosError } from 'axios';
 import { AuthResponse, LoginRequest, RegisterRequest, UpdateProfileRequest, UpdateProfileResponse, User } from '../types/auth.types';
 
+
+// Function para extraer el usuario del payload de la respuesta
+// payload: es un objeto que puede ser de tipo UpdateProfileResponse o User
+// Se utiliza para manejar diferentes formatos de respuesta del servidor
 const extractUserFromProfilePayload = (payload: unknown): User | null => {
     if (!payload || typeof payload !== 'object') return null;
 
@@ -21,11 +25,11 @@ const extractUserFromProfilePayload = (payload: unknown): User | null => {
 
 export const authService = {
     login: async (credentials: LoginRequest): Promise<AuthResponse> => {
-        const {data} = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, credentials);
+        const { data } = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, credentials);
         return data;
     },
     register: async (credentials: RegisterRequest): Promise<AuthResponse> => {
-        const {data} = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.REGISTER, credentials);
+        const { data } = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.REGISTER, credentials);
         return data;
     },
     updateProfile: async (payload: UpdateProfileRequest): Promise<User> => {
@@ -58,5 +62,9 @@ export const authService = {
         }
 
         throw lastError ?? new Error('No se encontro un endpoint valido para actualizar perfil');
+    },
+    logout: async () => {
+        // Llama al backend para que elimine la cookie httpOnly "auth-token"
+        await api.post(API_ENDPOINTS.AUTH.LOGOUT);
     }
 }

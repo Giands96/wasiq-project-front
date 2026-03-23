@@ -4,20 +4,13 @@ import { User } from "@/modules/auth/types/auth.types";
 
 // Definimos una interfaz para el estado de autenticación
 interface AuthState {
-
-  // El usuario autenticado o null si no hay ninguno
   user: User | null;
-  // El token de autenticación o null si no hay ninguno
-  token: string | null;
-  // Indica si el usuario está autenticado
   isAuthenticated: boolean;
-  // Acción para iniciar sesión
-  setAuth: (user: User, token: string) => void;
+  setAuth: (user: User) => void;
+  clearAuth: () => void;
+  logout: () => void;
   _hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
-  expiration: number;
-  // Acción para cerrar sesión
-  logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -25,33 +18,30 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       // Estado Inicial
       user: null,
-      token: null,
       isAuthenticated: false,
       _hasHydrated: false,
-      expiration: 0,
       setHasHydrated: (state) => set({ _hasHydrated: state }),
-      //* login recoge user y token, y setea el estado correspondiente
-      setAuth: (user, token) => set({ user, token, isAuthenticated: true, expiration: Date.now() + 24 * 60 * 60 * 1000 }),
+
+      // Ya no almacenamos el token — el backend lo maneja via httpOnly cookie
+      setAuth: (user) => set({ user, isAuthenticated: true }),
+
+      clearAuth: () => {
+        set({ user: null, isAuthenticated: false });
+      },
+
       logout: () => {
-        set({ user: null, token: null, isAuthenticated: false });
-        localStorage.removeItem('wasiq-auth-storage');
+        set({ user: null, isAuthenticated: false });
       },
     }),
     {
       name: 'wasiq-auth-storage',
-      // partialize es un middleware que permite guardar solo lo que queremos en el localStorage
+      // partialize: solo guardamos datos del usuario, ya no el token ni expiration
       partialize: (state) => ({
-        token: state.token,
         user: state.user,
         isAuthenticated: state.isAuthenticated,
-        expiration: state.expiration,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
-        const now = Date.now();
-        if (state?.expiration && now > state.expiration) {
-          state.logout();
-        }
       }
     }
   )

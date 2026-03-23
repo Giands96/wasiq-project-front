@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/shared/components/ui/Navbar";
+import { NavbarServer } from "@/shared/components/ui/NavbarServer";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${manrope.className} antialiased`}>
         <div className="flex flex-col min-h-screen">
-          <Navbar />
+          <NavbarServer />
           <main className="flex-1 pt-20">
             {children}
           </main>

@@ -33,7 +33,7 @@ import {
 
 export default function MyProfilePage() {
   const router = useRouter();
-  const { user, token, isAuthenticated, _hasHydrated, setAuth } = useAuthStore();
+  const { user, isAuthenticated, _hasHydrated, setAuth } = useAuthStore();
   const [isSaving, setIsSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -77,7 +77,7 @@ export default function MyProfilePage() {
   }, [user?.phone, watchedPhone, watchedPassword]);
 
   const onSubmit = async (data: MyProfileFormValues) => {
-    if (!user || !token) return;
+    if (!user) return;
 
     setIsSaving(true);
     try {
@@ -86,7 +86,7 @@ export default function MyProfilePage() {
         password: data.password || undefined,
       });
 
-      setAuth(updatedUser, token);
+      setAuth(updatedUser);
       form.reset({
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,

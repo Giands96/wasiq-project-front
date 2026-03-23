@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/shared/constants/routes";
 import { useAuthStore } from "@/store/useAuthStore";
+import { authService } from "@/modules/auth/services/auth.service";
 import { User, Menu, LogOut, Home, Settings, MenuIcon, Headset, House } from "lucide-react";
 
 import {
@@ -20,7 +21,12 @@ const UserMenu = () => {
   const { user, logout } = useAuthStore();
   const router = useRouter();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await authService.logout(); // Elimina la cookie httpOnly en el backend
+    } catch {
+      // Aunque falle la petición, limpiamos el estado local
+    }
     logout();
     router.push(ROUTES.HOME);
   };
@@ -102,18 +108,20 @@ const MobileMenu = () => {
   );
 };
 
-const AuthAreaSkeleton = ({ mobile = false }: { mobile?: boolean }) => (
-  <div
-    className={`animate-pulse bg-gray-100 rounded-full ${
-      mobile ? "w-10 h-10" : "w-32 h-9"
-    }`}
-  />
-);
+interface NavbarProps {
+  serverIsAuthenticated?: boolean;
+}
 
-export const Navbar = () => {
+export const Navbar = ({ serverIsAuthenticated = false }: NavbarProps) => {
 
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  // Después de la hidratación, Zustand tiene los datos del usuario (nombre, etc.)
+  // Antes de la hidratación, usamos serverIsAuthenticated para saber si mostrar
+  // el menú de usuario o el botón de login — sin flash.
+  const storeIsAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
+
+  // Si Zustand ya hidrató, usamos su estado. Si no, usamos el del servidor.
+  const isAuthenticated = hasHydrated ? storeIsAuthenticated : serverIsAuthenticated;
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
@@ -143,10 +151,18 @@ export const Navbar = () => {
 
           {/* Área de Usuario — Desktop */}
           <li className="ml-4 pl-4 border-l border-gray-200">
-            {!hasHydrated ? (
-              <AuthAreaSkeleton />
-            ) : isAuthenticated ? (
-              <UserMenu />
+            {isAuthenticated ? (
+              hasHydrated ? (
+                <UserMenu />
+              ) : (
+                // Placeholder con mismas dimensiones que UserMenu mientras Zustand hidrata
+                <div className="flex items-center gap-3 px-3 py-1.5 bg-white border border-gray-200 rounded-full shadow-xs">
+                  <div className="bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center text-neutral-600">
+                    <User size={18} />
+                  </div>
+                  <span className="text-sm font-medium text-gray-400">Cargando...</span>
+                </div>
+              )
             ) : (
               <Link
                 href={ROUTES.AUTH.LOGIN}
@@ -160,14 +176,14 @@ export const Navbar = () => {
 
         {/* Menú — Mobile */}
         <div className="md:hidden">
-          {/* ───────────────────────────────────────────────────────────────
-              CORRECCIÓN: Mismo patrón que desktop.
-              Skeleton mobile hasta que el store haya hidratado.
-          ─────────────────────────────────────────────────────────────── */}
-          {!hasHydrated ? (
-            <AuthAreaSkeleton mobile />
-          ) : isAuthenticated ? (
-            <MobileMenu />
+          {isAuthenticated ? (
+            hasHydrated ? (
+              <MobileMenu />
+            ) : (
+              <div className="bg-white border border-gray-200 p-3 rounded-full shadow-xs">
+                <MenuIcon className="w-6 h-6 text-gray-400 animate-pulse" />
+              </div>
+            )
           ) : (
             <Link
               href={ROUTES.AUTH.LOGIN}

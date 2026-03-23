@@ -19,7 +19,8 @@ export const useLogin = () => {
         try {
             const response = await authService.login(data);
 
-            loginToStore(response.user, response.token);
+            // El token ya viene como cookie httpOnly desde el backend
+            loginToStore(response.user);
 
             router.push(ROUTES.HOME);
         } catch (error) {

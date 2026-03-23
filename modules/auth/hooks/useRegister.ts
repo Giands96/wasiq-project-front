@@ -19,7 +19,7 @@ export const useRegister = () => {
 
         try {
             const response = await authService.register(data);
-            registerToStore(response.user, response.token);
+            registerToStore(response.user);
             router.push(ROUTES.HOME);
         } catch (err) {
             const axiosError = err as AxiosError;
@@ -32,7 +32,7 @@ export const useRegister = () => {
             toast.error(message);
         } finally {
             setIsLoading(false);
-    }
+        }
     };
 
     return {

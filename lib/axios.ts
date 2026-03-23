@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ROUTES } from '@/shared/constants/routes';
+
 // Función para extraer el path de una URL, manejando casos con o sin base URL
 const getRequestPath = (url?: string): string => {
   if (!url) return '';
@@ -28,21 +29,13 @@ const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         'Content-Type' : 'application/json'
-    }
+    },
+    // Permite que el navegador envíe la cookie httpOnly "auth-token" automáticamente
+    withCredentials: true,
 })
 
-api.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().token;
-    if (token && !isPublicPropertiesReadRequest(config.url, config.method)) {
-       config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// Ya no necesitamos el interceptor de request para agregar el header Authorization.
+// La cookie httpOnly se envía automáticamente con withCredentials: true.
 
 api.interceptors.response.use(
   (response) => { return response; },
@@ -55,8 +48,7 @@ api.interceptors.response.use(
       useAuthStore.getState().logout();
 
       if(typeof window !== 'undefined') {
-        window.location.href = `${ROUTES.HOME}?expired=true`; // Redirige a la página de inicio de sesión con un mensaje de sesión expirada
-        
+        window.location.href = `${ROUTES.HOME}?expired=true`;
       }
 
     }
