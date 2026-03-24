@@ -1,9 +1,10 @@
 import { PropertyService } from '@/modules/properties/services/property.service';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { Home, Bed, Bath, Maximize, MapPin, User, ExternalLink, Share2, Heart } from 'lucide-react';
+import { Bed, Bath, Maximize, MapPin, User, ExternalLink, Share2, Heart, Home } from 'lucide-react';
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
+import { ImageGallery } from '@/modules/properties/components/ImageGallery';
 
 interface PropertyDetailsPageProps {
     params: {
@@ -16,7 +17,7 @@ interface PropertyDetailsPageProps {
 export default async function PropertyDetailsPage({ params }: PropertyDetailsPageProps) {
     const { slug } = await params;
     const property = await PropertyService.getPropertyBySlug(slug);
-    
+
 
     if (property == null) {
         return notFound();
@@ -40,35 +41,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                 <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
                     {/* Columna izquierda - Imágenes y detalles principales */}
                     <div className='lg:col-span-2 space-y-6'>
-                        {/* Galería de imágenes */}
-                        <div className='bg-white rounded-lg overflow-hidden shadow-sm'>
-                            {normalizedImages.length > 0 ? (
-                                <div className='grid grid-cols-2 gap-2 p-2'>
-                                    {/* Imagen principal */}
-                                    <div className='col-span-2 relative h-96'>
-                                        <img
-                                            src={normalizedImages[0]}
-                                            alt={property.title}
-                                            className='object-cover rounded-lg w-full h-full'
-                                        />
-                                    </div>
-                                    {/* Imágenes secundarias */}
-                                    {normalizedImages.slice(1, 4).map((image, index) => (
-                                        <div key={index} className='relative h-48'>
-                                            <img
-                                                src={image}
-                                                alt={`${property.title} - ${index + 2}`}
-                                                className='object-cover rounded-lg w-full h-full'
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className='h-96 bg-gray-200 flex items-center justify-center'>
-                                    <Home className='w-16 h-16 text-gray-400' />
-                                </div>
-                            )}
-                        </div>
+                        {/* Galería de imágenes con vista completa */}
+                        <ImageGallery images={normalizedImages} title={property.title} />
 
                         {/* Información principal */}
                         <div className='bg-white rounded-lg p-6 shadow-sm'>
@@ -175,7 +149,9 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </span>
                                 </div>
                                 <p className='text-sm text-gray-500'>
-                                    {property.propertyType} • {property.operationType}
+                                    {property.propertyType === 'HOUSE' ? 'CASA' :
+                                        property.propertyType === 'APARTMENT' ? 'DEPARTAMENT    O' :
+                                            property.propertyType === 'LAND' ? 'TERRENO' : 'PROPIEDAD'} • {property.operationType === 'SALE' ? 'VENTA' : 'ALQUILER'}
                                 </p>
                             </div>
 
@@ -192,19 +168,18 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                             <p className='font-medium text-gray-900'>{property.ownerName}</p>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <ForAuthenticatedUser phoneNumber={property.ownerPhone} ownerEmail={property.ownerEmail} />
-                            <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug}/>
-                            
+                            <PropertyOwnerControls ownerId={property.ownerId} slug={property.slug} />
+
 
                             {/* Badge de disponibilidad */}
-                            <div className={`text-center py-2 px-4 rounded-lg ${
-                                property.available 
-                                    ? 'bg-beige text-primary-button' 
-                                    : 'bg-red-50 text-red-700'
-                            }`}>
+                            <div className={`text-center py-2 px-4 rounded-lg ${property.available
+                                ? 'bg-beige text-primary-button'
+                                : 'bg-red-50 text-red-700'
+                                }`}>
                                 <p className='text-sm font-semibold'>
                                     {property.available ? '✓ Disponible Ahora' : '✗ No Disponible'}
                                 </p>
