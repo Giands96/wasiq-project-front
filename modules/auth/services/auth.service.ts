@@ -64,7 +64,6 @@ export const authService = {
         throw lastError ?? new Error('No se encontro un endpoint valido para actualizar perfil');
     },
     logout: async () => {
-        // Llama al backend para que elimine la cookie httpOnly "auth-token"
         await api.post(API_ENDPOINTS.AUTH.LOGOUT);
     }
 }

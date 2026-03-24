@@ -21,6 +21,7 @@ export const useRegister = () => {
             const response = await authService.register(data);
             registerToStore(response.user);
             router.push(ROUTES.HOME);
+            router.refresh();
         } catch (err) {
             const axiosError = err as AxiosError;
             const message =

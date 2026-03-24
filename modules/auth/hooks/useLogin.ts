@@ -23,6 +23,7 @@ export const useLogin = () => {
             loginToStore(response.user);
 
             router.push(ROUTES.HOME);
+            router.refresh();
         } catch (error) {
             const axiosError = error as AxiosError;
 
