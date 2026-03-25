@@ -13,7 +13,11 @@ export const ROUTES = {
         UPDATE: (slug: string) => `/properties/update/${slug}`,
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         SEARCH: (query: string) => `/properties?query=${encodeURIComponent(query)}`,
-
+    },
+    DASHBOARD: {
+        HOME: '/dashboard',
+        PROPERTIES: '/dashboard/properties',
+        USERS: '/dashboard/users',
     },
     CONTACT: {
         US: '/contact',
@@ -35,7 +39,9 @@ export const API_ENDPOINTS = {
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
         GET_ALL: '/properties/',
-
-
-    }
+    },
+    USERS: {
+        GET_ALL: '/users/all',
+        GET_BY_ROLE: (role: string) => `/users/by-role/${role}`,
+    },
 };
