@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { NavbarServer } from "@/shared/components/ui/NavbarServer";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -18,17 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html suppressHydrationWarning lang="en" data-scroll-behavior="smooth">
       <body className={`${manrope.className} antialiased`}>
-        <div className="flex flex-col min-h-screen">
-          <NavbarServer />
-          <main className="flex-1 pt-20">
-            {children}
-          </main>
-          <footer className="py-6 text-center text-sm text-gray-500 bg-gray-50 border-t">
-             © 2026 Wasiq Inmobiliaria. Todos los derechos reservados.
-          </footer>
-        </div>
+        {children}
       </body>
     </html>
   );
