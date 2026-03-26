@@ -37,7 +37,10 @@ export const CreatePropertyForm = () => {
   });
 
   const onSubmit = (data: PropertyFormValues) => {
-    handleCreate(data);
+    handleCreate({
+      ...data,
+      images: data.images || []
+    });
   }
 
     return(
