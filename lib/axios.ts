@@ -33,10 +33,6 @@ const api = axios.create({
     // Permite que el navegador envíe la cookie httpOnly "auth-token" automáticamente
     withCredentials: true,
 })
-
-// Ya no necesitamos el interceptor de request para agregar el header Authorization.
-// La cookie httpOnly se envía automáticamente con withCredentials: true.
-
 api.interceptors.response.use(
   (response) => { return response; },
   (error) => {
@@ -44,14 +40,17 @@ api.interceptors.response.use(
     const isAuthError = status === 401 || status === 403;
     const isPublicRead = isPublicPropertiesReadRequest(error.config?.url, error.config?.method);
 
+
     if (isAuthError && !isPublicRead) {
       useAuthStore.getState().logout();
 
+      
       if(typeof window !== 'undefined') {
         window.location.href = `${ROUTES.HOME}?expired=true`;
       }
 
     }
+
     return Promise.reject(error);
   }
 )
