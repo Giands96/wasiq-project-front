@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { ROUTES } from "@/shared/constants/routes";
-import next from "next";
 
 export function middleware(request: NextRequest) {
     // Obtener el token de la cookie httpOnly "auth-token" (establecida por el backend)
