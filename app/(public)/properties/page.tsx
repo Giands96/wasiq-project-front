@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react"; // <-- Agregamos Suspense aquí
 import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/modules/properties/components/PropertyCard";
 import FiltersControls from "@/modules/properties/components/FiltersControls";
@@ -13,12 +13,10 @@ const parseNumber = (value: string | null): number | undefined => {
   return Number.isFinite(parsed) ? parsed : undefined;
 };
 
-export default function PropertiesPage() {
+function PropertiesContent() {
   //URL
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
-
-  // Extraer todo directamente de Zustand
   const { 
     properties, 
     isLoading, 
@@ -27,7 +25,6 @@ export default function PropertiesPage() {
     fetchProperties
   } = usePropertyStore();
 
-  // El componente reacciona a la URL y le avisa a Zustand qué buscar
   useEffect(() => {
     const params: PropertyPaginationParams = {
       query: searchParams.get("query") || undefined,
@@ -53,6 +50,7 @@ export default function PropertiesPage() {
         </header>
 
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Le quitamos el Suspense que tenías aquí, ya no hace falta */}
           <FiltersControls/>
 
           <div className="lg:col-span-9">
@@ -77,7 +75,6 @@ export default function PropertiesPage() {
                 {/* Controles de Paginación */}
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <button
-                    // onClick={goToPreviousPage} <-- Temporalmente desactivado
                     disabled={currentPage === 0}
                     className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
                   >
@@ -89,7 +86,6 @@ export default function PropertiesPage() {
                   </span>
 
                   <button
-                    // onClick={goToNextPage} <-- Temporalmente desactivado
                     disabled={currentPage + 1 >= totalPages}
                     className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
                   >
@@ -106,5 +102,13 @@ export default function PropertiesPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function PropertiesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-bg-main p-12 text-center text-text-secondary">Cargando la página de propiedades...</div>}>
+      <PropertiesContent />
+    </Suspense>
   );
 }

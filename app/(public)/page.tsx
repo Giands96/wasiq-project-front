@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react"; // <-- Agregamos Suspense aquí
+
 import { ROUTES } from "@/shared/constants/routes";
 import Link from "next/link";
 import { Property } from "@/modules/properties/types/property.types";
@@ -13,12 +14,14 @@ import Hero from "@/shared/components/ui/home/hero";
 import About from "@/shared/components/ui/home/about";
 import Services from "@/shared/components/ui/home/services";
 
-export default function Home() {
-
+// 1. Renombramos tu Home original a HomeContent y quitamos el export default
+function HomeContent() {
   // Estado para controlar la razón activa en la sección "Wasiq es..."
   const [activeReason, setActiveReason] = useState<number | null>(null);
   const [previewProperties, setPreviewProperties] = useState<Property[]>([]);
   const [isLoadingPreview, setIsLoadingPreview] = useState(true);
+  
+  // Aquí está el hook que requiere Suspense
   const searchParams = useSearchParams();
   const isExpired = searchParams.get("expired") === "true";
   const router = useRouter();
@@ -115,5 +118,13 @@ export default function Home() {
       </section>
 
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white"></div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
