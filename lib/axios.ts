@@ -39,17 +39,15 @@ api.interceptors.response.use(
     const status = error.response?.status;
     const isAuthError = status === 401 || status === 403;
     const isPublicRead = isPublicPropertiesReadRequest(error.config?.url, error.config?.method);
+    const isAuthRoute = error.config?.url?.includes('/auth/');
 
 
-    if (isAuthError && !isPublicRead) {
-      useAuthStore.getState().logout();
-
-      
-      if(typeof window !== 'undefined') {
+    if (isAuthError && !isPublicRead && !isAuthRoute) {
+    useAuthStore.getState().logout();
+    if(typeof window !== 'undefined') {
         window.location.href = `${ROUTES.HOME}?expired=true`;
-      }
-
     }
+}
 
     return Promise.reject(error);
   }
