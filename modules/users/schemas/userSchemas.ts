@@ -9,7 +9,6 @@ export const myProfileSchema = z.object({
     .min(7, "El numero debe tener al menos 7 digitos"),
   password: z
     .string()
-    .optional()
     .refine(
       (value) => !value || value.length >= 6,
       "La contrasena debe tener al menos 6 caracteres"
