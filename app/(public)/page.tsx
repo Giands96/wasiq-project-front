@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import bgHome from "@/public/bg-home.png";
-import loginBg from "@/public/login-bg.webp";
 import { ROUTES } from "@/shared/constants/routes";
 import Link from "next/link";
 import { Property } from "@/modules/properties/types/property.types";
