@@ -18,15 +18,14 @@ export const useLogin = () => {
 
         try {
             const response = await authService.login(data);
-
-            // El token ya viene como cookie httpOnly desde el backend
             loginToStore(response.user);
-
             router.push(ROUTES.HOME);
             router.refresh();
         } catch (error) {
             const axiosError = error as AxiosError;
-
+            console.log("❌ Status:", axiosError.response?.status);
+            console.log("❌ Data:", axiosError.response?.data);
+            console.log("❌ Headers:", axiosError.response?.headers);
             if(axiosError.response?.status === 403) {
                 setError('Invalid credentials');
             } else {
