@@ -112,6 +112,10 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
+  const { user, isAuthenticated, _hasHydrated } = useAuthStore();
+  const clientIsAuthenticated = _hasHydrated && isAuthenticated;
+  const showAuthenticatedState = serverIsAuthenticated || clientIsAuthenticated;
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
       <div className="container mx-auto h-20 flex items-center justify-between px-4">
@@ -141,7 +145,7 @@ export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
 
           {/* Área de Usuario — Desktop */}
           <li className="ml-4 pl-4 border-l border-gray-200">
-            {serverIsAuthenticated ? (
+            {showAuthenticatedState ? (
               <UserMenu />
             ) : (
               <Link
@@ -156,7 +160,7 @@ export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
 
         {/* Menú — Mobile */}
         <div className="md:hidden">
-          {serverIsAuthenticated ? (
+          {showAuthenticatedState ? (
             <MobileMenu />
           ) : (
             <Link
