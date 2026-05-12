@@ -31,6 +31,10 @@ export const useRegister = () => {
 
             setError(message);
             toast.error(message);
+
+            console.log("❌ Status:", axiosError.response?.status);
+            console.log("❌ Data:", axiosError.response?.data);
+            console.log("❌ Headers:", axiosError.response?.headers);
         } finally {
             setIsLoading(false);
         }
