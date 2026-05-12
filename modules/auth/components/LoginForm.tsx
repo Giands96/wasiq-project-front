@@ -131,7 +131,7 @@ export const LoginForm = () => {
                   <div className="flex items-center justify-between text-sm">
 
                     <Link
-                      href="/forgot-password"
+                      href=""
                       className="text-muted-foreground hover:underline"
                     >
                       ¿Olvidaste tu contraseña?
