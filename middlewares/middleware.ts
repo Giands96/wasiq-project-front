@@ -5,7 +5,7 @@ import { ROUTES } from "@/shared/constants/routes";
 export function middleware(request: NextRequest) {
     // Obtener el token de la cookie httpOnly "auth-token" (establecida por el backend)
     const token = request.cookies.get("auth-token")?.value;
-    const user = { role: "USER" }
+    const user = { role: request.cookies.get("role")?.value };
     // pathname es la ruta actual
     const { pathname } = request.nextUrl;
 
