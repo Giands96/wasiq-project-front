@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/wasiq-project/**)",
+      "Bash(tsconfig)",
+      "Bash(package\" | head -20)"
+    ]
+  }
+}
