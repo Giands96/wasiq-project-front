@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { ROUTES } from "@/shared/constants/routes";
 
 export function middleware(request: NextRequest) {
-    const token = request.cookies.get("vercel-jwt")?.value;
+    const token = request.cookies.get("auth-token")?.value;
     const user = { role: request.cookies.get("role")?.value };
     const { pathname } = request.nextUrl;
 
