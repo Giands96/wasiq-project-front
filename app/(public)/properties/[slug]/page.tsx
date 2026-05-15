@@ -1,6 +1,8 @@
 import { PropertyService } from '@/modules/properties/services/property.service';
 import { notFound } from 'next/navigation';
 import React from 'react';
+
+export const revalidate = 3600;
 import { Bed, Bath, Maximize, MapPin, User, ExternalLink, Share2, Heart, Home } from 'lucide-react';
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
