@@ -20,6 +20,13 @@ export const useRegister = () => {
         try {
             const response = await authService.register(data);
             registerToStore(response.user);
+            
+            // Establecer cookies manualmente para que el middleware de Next.js pueda leerlas
+            document.cookie = `auth-token=${response.token}; path=/; max-age=86400; SameSite=Lax`;
+            if (response.user.role) {
+                document.cookie = `role=${response.user.role}; path=/; max-age=86400; SameSite=Lax`;
+            }
+
             router.push(ROUTES.HOME);
             router.refresh();
         } catch (err) {

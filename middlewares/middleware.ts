@@ -27,7 +27,8 @@ export function middleware(request: NextRequest) {
     // Si es una ruta protegida y el usuario que la visita no posee un token se redirige
     if (isProtectedRoute && !token) {
         const loginUrl = new URL(ROUTES.AUTH.LOGIN, request.url)
-        //Se añade un parámetro de búsqueda a la URL de login para que el usuario sea redirigido a la ruta actual después de iniciar sesión
+        //Se añade un parámetro de búsqueda a la URL de login para que el usuario sea redirigido
+        //a la ruta actual después de iniciar sesión
         loginUrl.searchParams.set("callbackUrl", pathname)
         return NextResponse.redirect(loginUrl)
     }
