@@ -20,6 +20,10 @@ export function middleware(request: NextRequest) {
     // Rutas que un usuario ya logueado no debería ver
     const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/register")
 
+    if(!token) {
+        console.error("No auth token found in cookies. User is not authenticated. Request URL:", request.url);
+    }
+
     // Si es una ruta protegida y el usuario que la visita no posee un token se redirige
     if (isProtectedRoute && !token) {
         const loginUrl = new URL(ROUTES.AUTH.LOGIN, request.url)
