@@ -18,7 +18,7 @@ interface PropertyState {
   searchByTitle: (query: string) => Promise<void>;
 }
 
-export const usePropertyStore = create<PropertyState>((set, get) => ({
+export const usePropertyStore = create<PropertyState>((set) => ({
   properties: [],
   isLoading: false,
   currentPage: 0,
