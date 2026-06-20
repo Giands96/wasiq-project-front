@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import bgHome from "@/public/bg-home.png";
-import loginBg from "@/public/login-bg.webp";
+import Seguridad from "@/public/1-bg.webp";
+import Confianza from "@/public/2-bg.webp";
+import Tranquilidad from "@/public/3-bg.webp";
+import Transparencia from "@/public/4-bg.webp";
 
 
 const reasons = [
@@ -11,25 +13,25 @@ const reasons = [
     number: "01",
     title: "Seguridad",
     description: "Validamos cada propiedad con criterios claros para proteger tu inversión.",
-    image: bgHome,
+    image: Seguridad,
   },
   {
     number: "02",
     title: "Confianza",
     description: "Acompañamiento experto y comunicación constante en cada etapa.",
-    image: loginBg,
+    image: Confianza,
   },
   {
     number: "03",
     title: "Tranquilidad",
     description: "Procesos ordenados y asesoría precisa para que decidas con calma.",
-    image: bgHome,
+    image: Tranquilidad,
   },
   {
     number: "04",
     title: "Transparencia",
     description: "Información real, condiciones visibles y soporte sin letra pequeña.",
-    image: loginBg,
+    image: Transparencia,
   },
 ];
 
