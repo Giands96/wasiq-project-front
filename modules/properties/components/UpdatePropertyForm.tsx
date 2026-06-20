@@ -18,6 +18,7 @@ import { X } from 'lucide-react'
 
 
 export const UpdatePropertyForm = () => {
+  // useParams para obtener el slug de la URL
   const params = useParams();
   const slug = params.slug as string;
   const { fetchPropertyBySlug, handleUpdate, currentProperty } = useProperties();
@@ -84,6 +85,9 @@ export const UpdatePropertyForm = () => {
     });
   }, [currentProperty, form]);
 
+
+  const {isSubmitting} = form.formState;
+
   const onSubmit = async (data: PropertyFormValues) => {
     if (!currentProperty) {
       toast.error("No se pudo cargar la propiedad. Por favor, intenta nuevamente.");
@@ -131,11 +135,22 @@ export const UpdatePropertyForm = () => {
       available: data.available,
     };
 
-    await handleUpdate(currentProperty.slug, {
+    try {
+      await handleUpdate(currentProperty.slug, {
       ...payload,
       keptImageIds: safeKeptImageIds,
       images: filesToSend,
-    });
+      });
+      if(isSubmitting) {
+        toast.warning("La actualización ya está en proceso...");
+        return;
+      }
+      toast.success("Propiedad actualizada exitosamente");
+    } catch (error) {
+      toast.error("Error al actualizar la propiedad. Por favor, intenta nuevamente.");
+      console.error("Error en handleUpdate:", error);
+      return;
+    }
   }
 
   const keptImageIds = useWatch({ control: form.control, name: "keptImageIds" }) ?? [];
@@ -471,9 +486,10 @@ export const UpdatePropertyForm = () => {
 
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full bg-primary-base hover:bg-primary-hover text-white font-medium py-2 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
               >
-                Actualizar Propiedad
+                {isSubmitting ? "Actualizando..." : "Actualizar Propiedad"}
               </Button>
             </form>
           </Form>
