@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ROUTES } from "@/shared/constants/routes";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useLogout } from "@/modules/auth/hooks/useLogout";
-import { User, Menu, LogOut, Home, Settings, MenuIcon, Headset, House } from "lucide-react";
+import { User, Menu, LogOut, Home, Settings, MenuIcon, Headset, House, ShieldUser } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -44,6 +44,11 @@ const UserMenu = () => {
               <User className="mr-2 h-4 w-4" /> Perfil
             </Link>
           </DropdownMenuItem>
+          {(user?.role === "ADMIN") && (<DropdownMenuItem asChild className="cursor-pointer">
+            <Link href={ROUTES.DASHBOARD.HOME}>
+              <ShieldUser className="mr-2 h-4 w-4" /> Dashboard Admin.
+            </Link>
+          </DropdownMenuItem>)}
           <DropdownMenuItem className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" /> Configuración
           </DropdownMenuItem>
@@ -83,6 +88,7 @@ const MobileMenu = () => {
             <Home className="mr-2 h-4 w-4" /> Inicio
           </Link>
         </DropdownMenuItem>
+        {/* asChild es */ }
         <DropdownMenuItem asChild>
           <Link href={ROUTES.PROPERTIES.LIST} className="cursor-pointer">
             <House className="mr-2 h-4 w-4" /> Propiedades
