@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import Hero from "@/shared/components/ui/home/hero";
 import About from "@/shared/components/ui/home/about";
 import Services from "@/shared/components/ui/home/services";
+import { FooterComponent } from "@/shared/components/ui/home/footer";
 
 // 1. Renombramos tu Home original a HomeContent y quitamos el export default
 function HomeContent() {
@@ -52,7 +53,6 @@ function HomeContent() {
       
       {/* ===== HERO SECTION ===== */}
       {/* Mobile: h-[60vh] | Tablet: h-[75vh] | Desktop: h-screen */}
-      <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen w-full overflow-hidden">
         
         <Hero/>
 
@@ -72,20 +72,20 @@ function HomeContent() {
             </svg>
           </div>
         </div>
-      </section>
+
 
       {/* ===== ABOUT US SECTION ===== */}
       <About />
 
       <section id="properties" className="min-h-[64vh] py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
-          <div className="mb-8 flex items-center justify-between gap-4">
+          <div className="mb-8 flex items-center justify-between md:gap-4 gap-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
               Explora nuevas propiedades
             </h2>
             <Link
               href={ROUTES.PROPERTIES.LIST}
-              className="inline-flex items-center justify-center rounded-full border border-bg-normal-link  bg-transparent px-5 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:text-white duration-300 hover:bg-hover-link"
+              className="inline-flex w-1/2  sm:w-fit items-center justify-center rounded-full border border-bg-normal-link  bg-transparent px-5 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:text-white duration-300 hover:bg-hover-link"
             >
               Ver más
             </Link>
@@ -113,10 +113,7 @@ function HomeContent() {
           )}
         </div>
       </section>
-      <section>
-        <Services />
-      </section>
-
+      <Services />
     </main>
   );
 }
