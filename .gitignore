@@ -45,3 +45,8 @@ next-env.d.ts
 .env
 # GIT
 .gitignore
+
+graphify-out
+.claude
+.opencode
+AGENTS.md

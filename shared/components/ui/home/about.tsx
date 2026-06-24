@@ -41,13 +41,13 @@ export default function About() {
   return (
     <section 
       id="about" 
-      className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-neutral-00/40"
+      className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-beige to-yellow-100/50"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* COLUMNA IZQUIERDA - TEXTO */}
-          <div className="order-2 lg:order-1 flex flex-col justify-center">
+          <div className="order-1 lg:order-1 flex flex-col justify-center ">
             <span className="text-sm font-medium text-normal-link uppercase tracking-wider mb-2">
               Sobre nosotros
             </span>
@@ -63,7 +63,7 @@ export default function About() {
 
           {/* COLUMNA DERECHA - GRID DE IMÁGENES */}
           <div 
-            className="order-1 lg:order-2"
+            className="order-2 lg:order-2"
             onMouseLeave={() => setActiveReason(null)}
           >
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
