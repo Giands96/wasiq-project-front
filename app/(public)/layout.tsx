@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavbarServer } from '@/shared/components/ui/NavbarServer'
+import { FooterComponent } from '@/shared/components/ui/home/footer';
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,9 +9,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <main className="flex-1 pt-20">
         {children}
       </main>
-      <footer className="py-6 text-center text-sm text-gray-500 bg-gray-50 border-t">
-        © 2026 Wasiq Inmobiliaria. Todos los derechos reservados.
-      </footer>
+      <FooterComponent />
     </div>
   )
 }
