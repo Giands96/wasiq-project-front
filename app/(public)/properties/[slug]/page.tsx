@@ -129,7 +129,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                 </div>
                                 <div className='p-4 bg-gray-50 rounded-lg'>
                                     <p className='text-sm text-gray-500 mb-1'>Estado</p>
-                                    <p className={`font-semibold ${property.available ? 'text-green-600' : 'text-red-600'}`}>
+                                    <p className={`font-semibold ${property.available ? 'text-blue-500' : 'text-neutral-600'}`}>
                                         {property.available ? 'Disponible' : 'No disponible'}
                                     </p>
                                 </div>
@@ -180,10 +180,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${property.available
                                 ? 'bg-beige text-primary-button'
-                                : 'bg-red-50 text-red-700'
+                                : 'bg-neutral-100 text-neutral-500'
                                 }`}>
-                                <p className='text-sm font-semibold'>
-                                    {property.available ? '✓ Disponible Ahora' : '✗ No Disponible'}
+                                <p className='text-sm font-regular'>
+                                    {property.available ? 'Disponible Ahora' : 'No Disponible'}
                                 </p>
                             </div>
                         </div>
