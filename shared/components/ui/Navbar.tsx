@@ -132,7 +132,7 @@ export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
         </Link>
 
         {/* Links de Navegación — Desktop */}
-        <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <ul className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
           <li>
             <Link href="/" className="hover:text-black transition-colors">
               Inicio
@@ -165,7 +165,7 @@ export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
         </ul>
 
         {/* Menú — Mobile */}
-        <div className="md:hidden">
+        <div className="lg:hidden ">
           {showAuthenticatedState ? (
             <MobileMenu />
           ) : (
