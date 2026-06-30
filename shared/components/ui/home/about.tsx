@@ -41,7 +41,7 @@ export default function About() {
   return (
     <section 
       id="about" 
-      className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-beige to-yellow-100/50"
+      className="min-h-screen py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-white via-[#F9FAFB] to-[#F3F4F6]"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
@@ -51,10 +51,10 @@ export default function About() {
             <span className="text-sm font-medium text-normal-link uppercase tracking-wider mb-2">
               Sobre nosotros
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary leading-tight mb-6">
-              Wasiq es <span className="text-normal-link">tu aliado</span> inmobiliario
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-6">
+              Wasiq es <span className="text-[#374151]">tu aliado</span> inmobiliario
             </h2>
-            <p className="text-base sm:text-lg text-text-secondary leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-[#6B7280] leading-relaxed mb-6">
               Somos un portal web inmobiliario que conecta a personas con propiedades 
               de valor real. Explora, compara y decide con toda la información que necesitas, respaldada 
               por un equipo comprometido con tu tranquilidad.

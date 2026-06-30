@@ -60,7 +60,7 @@ function PropertiesContent() {
                 {Array.from({ length: 9 }).map((_, index) => (
                   <div
                     key={index}
-                    className="h-96 animate-pulse rounded-2xl border border-border-light bg-beige"
+                    className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]"
                   />
                 ))}
               </div>

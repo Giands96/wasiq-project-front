@@ -49,7 +49,7 @@ function HomeContent() {
   }, [isExpired, router]);
 
   return (
-    <main className="w-full">
+    <main className="w-full bg-white text-[#111827]">
       
       {/* ===== HERO SECTION ===== */}
       {/* Mobile: h-[60vh] | Tablet: h-[75vh] | Desktop: h-screen */}
@@ -77,10 +77,13 @@ function HomeContent() {
       {/* ===== ABOUT US SECTION ===== */}
       <About />
 
-      <section id="properties" className="min-h-[64vh] py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
+      <section
+          id="properties"
+          className="min-h-[64vh] bg-gradient-to-b from-[#F3F4F6] via-[#F8FAFC] to-white py-12 sm:py-16 md:py-20 lg:py-24"
+        >
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
           <div className="mb-8 flex items-center justify-between md:gap-4 gap-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827]">
               Explora nuevas propiedades
             </h2>
             <Link
@@ -96,7 +99,7 @@ function HomeContent() {
               {Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
-                  className="h-96 animate-pulse rounded-2xl border border-border-light bg-beige"
+                  className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]"
                 />
               ))}
             </div>
@@ -107,7 +110,7 @@ function HomeContent() {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-border-light bg-bg-card p-6 text-center text-text-secondary">
+            <div className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]">
               Aún no hay propiedades disponibles para mostrar.
             </div>
           )}

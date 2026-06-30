@@ -33,7 +33,7 @@ function Services() {
     return (
       <section
         id="services"
-        className="min-h-[60vh]  py-12 sm:py-16 md:py-20 lg:py-24 bg-beige"
+        className="min-h-[60vh] py-12 sm:py-16 md:py-20 lg:py-24 "
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-20 my-16">
           {/* Título de la sección al estilo del diseño original */}
