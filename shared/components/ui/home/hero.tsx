@@ -5,10 +5,9 @@ import Image from "next/image";
 
 function Hero() {
   return (
-    <section className="w-full h-dvh px-6 py-6">
-      <div className="relative w-full h-[85dvh] md:h-[85dvh] sm:h-[50dvh]  rounded-4xl overflow-hidden animate-fade-in-up animate-duration-1000">
-        
-        {/* Imagen con Next.js Image + fill */}
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background Image con overlay gradiente */}
+      <div className="absolute inset-0">
         <Image
           src={HeroImage}
           alt="Interior moderno"
@@ -16,24 +15,56 @@ function Hero() {
           className="object-cover object-center"
           priority
         />
+        {/* Gradient overlay mejorado */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/35 to-black/70" />
+      </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10" />
-
-        {/* Texto */}
-        <div className="relative z-20 flex items-center justify-center h-full text-center text-white px-6">
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
-            Tu proxima propiedad está <br className="hidden sm:block" /> aquí
-          </h1>
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center justify-center mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-orange-300 opacity-90">
+            Desde Wasiq
+          </p>
         </div>
 
-        <Link
-          href="/properties"
-          className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 bg-beige text-black px-6 py-3 rounded-full transition-all duration-300 hover:bg-beige-dark hover:scale-105 whitespace-nowrap"
+        {/* Título principal */}
+        <h1 
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-6 animate-fade-in"
+          style={{ animationDelay: "0.2s" }}
         >
-          Ver propiedades
-        </Link>
+          Tu próxima propiedad está <br className="hidden sm:block" /> aquí
+        </h1>
+
+        {/* Descripción */}
+        <p 
+          className="text-base sm:text-lg text-gray-200 max-w-2xl mx-auto mb-10 font-light leading-relaxed animate-fade-in"
+          style={{ animationDelay: "0.3s" }}
+        >
+          Conectamos personas con propiedades de valor real. Explora, compara y decide con la información que necesitas.
+        </p>
+
+        {/* Botones */}
+        <div 
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in"
+          style={{ animationDelay: "0.4s" }}
+        >
+          <Link
+            href="/properties"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap"
+          >
+            Ver propiedades
+          </Link>
+          <Link
+            href="#about"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-all duration-300 whitespace-nowrap"
+          >
+            Conocer más
+          </Link>
+        </div>
       </div>
+
+      
     </section>
   );
 }

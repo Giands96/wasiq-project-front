@@ -33,41 +33,70 @@ function Services() {
     return (
       <section
         id="services"
-        className="min-h-[60vh] py-12 sm:py-16 md:py-20 lg:py-24 "
+        className="min-h-[60vh] py-12 sm:py-16 md:py-20 lg:py-24 bg-white"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-20 my-16">
-          {/* Título de la sección al estilo del diseño original */}
-          <div className="flex justify-between items-center mb-10">
-            <span className="text-sm font-medium text-normal-link uppercase tracking-wider mb-2">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
+          {/* Encabezado de la sección */}
+          <div className="mb-16 text-center scroll-reveal">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Nuestros servicios
-            </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Ofrecemos soluciones integrales para encontrar la propiedad perfecta
+            </p>
           </div>
 
-          {/* Grid de tarjetas */}
+          {/* Grid de tarjetas de servicios */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center border border-gray-50"
+                className="service-card group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col items-center text-center scroll-reveal"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Icono más grande y con estilo visual */}
-                <div className="mb-6">
-                  <service.icon className="w-12 h-12 text-[#a67c52]" />
+                {/* Icono con fondo y animación */}
+                <div className="mb-6 relative">
+                  <div className="absolute inset-0 bg-orange-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+                  <service.icon className="w-12 h-12 text-orange-500 relative z-10 group-hover:scale-110 transition-transform duration-300" />
                 </div>
 
-                {/* Título con más peso visual */}
-                <h3 className="text-lg font-bold text-[#4a3f35] mb-3 leading-tight">
+                {/* Título */}
+                <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight">
                   {service.title}
                 </h3>
 
-                {/* Descripción con color suavizado */}
-                <p className="text-gray-500 text-sm leading-relaxed">
+                {/* Descripción */}
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </div>
             ))}
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          }
+
+          .service-card {
+            --delay: 0s;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) forwards;
+          }
+        `}</style>
       </section>
     );
 

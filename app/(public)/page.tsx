@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react"; // <-- Agregamos Suspense aquí
+import { useEffect, useState, Suspense } from "react";
 
 import { ROUTES } from "@/shared/constants/routes";
 import Link from "next/link";
@@ -15,18 +15,13 @@ import About from "@/shared/components/ui/home/about";
 import Services from "@/shared/components/ui/home/services";
 import { FooterComponent } from "@/shared/components/ui/home/footer";
 
-// 1. Renombramos tu Home original a HomeContent y quitamos el export default
 function HomeContent() {
-  // Estado para controlar la razón activa en la sección "Wasiq es..."
-  const [activeReason, setActiveReason] = useState<number | null>(null);
   const [previewProperties, setPreviewProperties] = useState<Property[]>([]);
   const [isLoadingPreview, setIsLoadingPreview] = useState(true);
   
-  // Aquí está el hook que requiere Suspense
   const searchParams = useSearchParams();
   const isExpired = searchParams.get("expired") === "true";
   const router = useRouter();
-
 
   useEffect(() => {
     if(isExpired) {
@@ -47,6 +42,29 @@ function HomeContent() {
 
     loadPreviewProperties();
   }, [isExpired, router]);
+
+  // Scroll reveal observer
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <main className="w-full bg-white text-[#111827]">
@@ -79,18 +97,23 @@ function HomeContent() {
 
       <section
           id="properties"
-          className="min-h-[64vh] bg-gradient-to-b from-[#F3F4F6] via-[#F8FAFC] to-white py-12 sm:py-16 md:py-20 lg:py-24"
+          className="min-h-[64vh] bg-gradient-to-b from-gray-50 via-gray-50 to-white py-12 sm:py-16 md:py-20 lg:py-24"
         >
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
-          <div className="mb-8 flex items-center justify-between md:gap-4 gap-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827]">
-              Explora nuevas propiedades
-            </h2>
+          <div className="mb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 scroll-reveal">
+            <div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+                Explora nuevas propiedades
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base mt-2">
+                Descubre las mejores opciones disponibles para tu próximo hogar
+              </p>
+            </div>
             <Link
               href={ROUTES.PROPERTIES.LIST}
-              className="inline-flex w-1/2  sm:w-fit items-center justify-center rounded-full border border-bg-normal-link  bg-transparent px-5 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:text-white duration-300 hover:bg-hover-link"
+              className="inline-flex items-center justify-center rounded-full border border-orange-500 bg-transparent px-6 py-2.5 text-sm font-semibold text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white whitespace-nowrap"
             >
-              Ver más
+              Ver todas
             </Link>
           </div>
 
@@ -99,7 +122,7 @@ function HomeContent() {
               {Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
-                  className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]"
+                  className="h-96 animate-pulse rounded-2xl border border-gray-200 bg-gray-100"
                 />
               ))}
             </div>
@@ -110,8 +133,10 @@ function HomeContent() {
               ))}
             </div>
           ) : (
-            <div className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]">
-              Aún no hay propiedades disponibles para mostrar.
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-base">
+                Aún no hay propiedades disponibles para mostrar.
+              </p>
             </div>
           )}
         </div>
