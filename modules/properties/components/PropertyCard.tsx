@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import bgHome from "@/public/bg-home.png";
+import bgHome from "@/public/placeholder-property.webp";
 import { ROUTES } from "@/shared/constants/routes";
 import { Property } from "../types/property.types";
 
@@ -19,6 +19,7 @@ const formatPrice = (price: number) => {
 export const PropertyCard = ({ property }: PropertyCardProps) => {
   const firstImage = property.images?.[0];
   const resolvedImage = typeof firstImage === "string" ? firstImage : firstImage?.url;
+
   const imageSrc = resolvedImage && resolvedImage.trim().length > 0 ? resolvedImage : bgHome;
 
   return (

@@ -41,7 +41,10 @@ export const CreatePropertyForm = () => {
       await handleCreate({
         ...data,
         images: data.images || [],
+        
       });
+      //verificar si no hay imagenes, si no hay, mostrar un toast de error
+      
       toast.success("Propiedad creada exitosamente");
     } catch (error) {
       toast.error("Error al crear la propiedad. Intenta nuevamente.");
