@@ -22,6 +22,10 @@ export const useProperties = () => {
     // HANDLER ACTUALIZAR PROPIEDAD
     const handleUpdate = async (slug: string, data: UpdatePropertyRequest) => {
         try {
+            if (!data.images || data.images.length === 0) {
+        toast.error("Estás intentando actualizar una propiedad sin imágenes. Por favor, agrega al menos una imagen.");
+        return;
+      }
             await updatePropertyStore(slug, data);
             toast.success("Propiedad actualizada exitosamente");
             router.push(ROUTES.PROPERTIES.DETAIL(slug)); 
