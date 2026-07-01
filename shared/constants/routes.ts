@@ -5,6 +5,7 @@ export const ROUTES = {
         REGISTER: '/register',
         LOGOUT: '/logout',
         MY_PROFILE: '/my-profile',
+        REFRESH: "/refresh"
     },
     PROPERTIES: {
         LIST: '/properties',

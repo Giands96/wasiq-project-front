@@ -2,43 +2,119 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { ROUTES } from "@/shared/constants/routes";
 
-export function middleware(request: NextRequest) {
-    // Obtener el token de la cookie httpOnly "auth-token" (establecida por el backend)
-    const token = request.cookies.get("auth-token")?.value;
+const AUTH_TOKEN = "auth-token";
+const REFRESH_TOKEN = "refresh-token";
+
+function isJwtExpired(token: string): boolean {
+    try {
+        const payload = JSON.parse(
+            atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+        );
+
+        if (!payload.exp) return true;
+
+        const expiresAt = payload.exp * 1000;
+        const now = Date.now();
+
+        return expiresAt <= now;
+    } catch {
+        return true;
+    }
+}
+
+function redirectToLogin(request: NextRequest) {
+    const loginUrl = new URL(ROUTES.AUTH.LOGIN, request.url);
+    loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+
+    const response = NextResponse.redirect(loginUrl);
+
+    response.cookies.delete(AUTH_TOKEN);
+    response.cookies.delete(REFRESH_TOKEN);
+    response.cookies.delete("role");
+
+    return response;
+}
+
+async function refreshAuth(request: NextRequest) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    if (!backendUrl) return null;
+
+    const refreshResponse = await fetch(ROUTES.AUTH.REFRESH, {
+        method: "POST",
+        headers: {
+            cookie: request.headers.get("cookie") ?? "",
+        },
+        credentials: "include",
+    });
+
+    if (!refreshResponse.ok) return null;
+
+    return refreshResponse;
+}
+
+function copySetCookie(from: Response, to: NextResponse) {
+    const setCookie = from.headers.get("set-cookie");
+
+    if (setCookie) {
+        to.headers.set("set-cookie", setCookie);
+    }
+}
+
+export async function middleware(request: NextRequest) {
+    const token = request.cookies.get(AUTH_TOKEN)?.value;
+    const refreshToken = request.cookies.get(REFRESH_TOKEN)?.value;
     const user = { role: request.cookies.get("role")?.value };
-    // pathname es la ruta actual
     const { pathname } = request.nextUrl;
 
-    // Rutas protegidas
     const isProtectedRoute =
-        pathname.startsWith('/my-profile') ||
-        pathname.startsWith('/properties/create') ||
-        pathname.startsWith('/properties/update') ||
-        pathname.startsWith('/properties/delete') ||
-        pathname.startsWith('/dashboard')
+        pathname.startsWith("/my-profile") ||
+        pathname.startsWith("/properties/create") ||
+        pathname.startsWith("/properties/update") ||
+        pathname.startsWith("/properties/delete") ||
+        pathname.startsWith("/dashboard");
 
-    // Rutas que un usuario ya logueado no debería ver
-    const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/register")
+    const isAuthRoute =
+        pathname.startsWith("/login") ||
+        pathname.startsWith("/register");
 
-    if(!token) {
-        console.error("No auth token found in cookies. User is not authenticated. Request URL:", request.url);
+    if (isProtectedRoute) {
+        if (token && !isJwtExpired(token)) {
+            if (pathname.startsWith("/dashboard") && user.role !== "ADMIN") {
+                return new NextResponse("Not Found", { status: 404 });
+            }
+
+            return NextResponse.next();
+        }
+
+        if (refreshToken) {
+            const refreshResponse = await refreshAuth(request);
+
+            if (refreshResponse) {
+                const response = NextResponse.next();
+                copySetCookie(refreshResponse, response);
+                return response;
+            }
+        }
+
+        return redirectToLogin(request);
     }
 
-    // Si es una ruta protegida y el usuario que la visita no posee un token se redirige
-    if (isProtectedRoute && !token) {
-        const loginUrl = new URL(ROUTES.AUTH.LOGIN, request.url)
-        //Se añade un parámetro de búsqueda a la URL de login para que el usuario sea redirigido
-        //a la ruta actual después de iniciar sesión
-        loginUrl.searchParams.set("callbackUrl", pathname)
-        return NextResponse.redirect(loginUrl)
+    if (isAuthRoute && token && !isJwtExpired(token)) {
+        return NextResponse.redirect(new URL(ROUTES.AUTH.MY_PROFILE, request.url));
     }
 
-    if (isAuthRoute && token) {
-        return NextResponse.redirect(new URL(ROUTES.AUTH.MY_PROFILE, request.url))
-    }
+    if (isAuthRoute && refreshToken) {
+        const refreshResponse = await refreshAuth(request);
 
-    if (pathname.startsWith("/dashboard") && user?.role !== "ADMIN") {
-        return new NextResponse("Not Found", { status: 404 });
+        if (refreshResponse) {
+            const response = NextResponse.redirect(
+                new URL(ROUTES.AUTH.MY_PROFILE, request.url)
+            );
+
+            copySetCookie(refreshResponse, response);
+            return response;
+        }
     }
 
     return NextResponse.next();
@@ -46,12 +122,12 @@ export function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/my-profile',
-        '/properties/create',
-        '/properties/update',
-        '/properties/delete',
-        '/login',
-        '/register',
-        '/dashboard/:path*',
-    ]
-}
+        "/my-profile/:path*",
+        "/properties/create/:path*",
+        "/properties/update/:path*",
+        "/properties/delete/:path*",
+        "/login",
+        "/register",
+        "/dashboard/:path*",
+    ],
+};
