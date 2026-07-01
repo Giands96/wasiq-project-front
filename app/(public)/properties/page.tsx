@@ -42,11 +42,11 @@ function PropertiesContent() {
   }, [searchParams, fetchProperties]); 
 
   return (
-    <main className="min-h-screen bg-bg-main py-12 sm:py-16">
+    <main className="min-h-screen bg-white py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
         <header className="mb-8 sm:mb-10">
-          <h1 className="text-3xl font-bold text-text-primary sm:text-4xl">Propiedades</h1>
-          <p className="mt-2 text-text-secondary">Encuentra la propiedad ideal para tu siguiente etapa.</p>
+          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Propiedades</h1>
+          <p className="mt-2 text-gray-600">Encuentra la propiedad ideal para tu siguiente etapa.</p>
         </header>
 
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
@@ -60,7 +60,7 @@ function PropertiesContent() {
                 {Array.from({ length: 9 }).map((_, index) => (
                   <div
                     key={index}
-                    className="h-96 animate-pulse rounded-2xl border border-[#E5E7EB] bg-[#F3F4F6]"
+                    className="h-96 animate-pulse rounded-2xl border border-gray-200 bg-gray-100"
                   />
                 ))}
               </div>
@@ -76,25 +76,25 @@ function PropertiesContent() {
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <button
                     disabled={currentPage === 0}
-                    className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Anterior
                   </button>
 
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Página {currentPage + 1} de {Math.max(totalPages, 1)}
                   </span>
 
                   <button
                     disabled={currentPage + 1 >= totalPages}
-                    className="rounded-md border border-border-light bg-beige px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-beige-dark disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Siguiente
                   </button>
                 </div>
               </>
             ) : (
-              <div className="rounded-2xl border border-border-light bg-bg-card p-8 text-center text-text-secondary">
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-center text-gray-600">
                 No se encontraron propiedades con la búsqueda &quot;{query}&quot;.
               </div>
             )}

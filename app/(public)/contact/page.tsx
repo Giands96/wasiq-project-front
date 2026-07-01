@@ -66,71 +66,71 @@ export default function ContactPage() {
     };
 
     return (
-        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_15%_20%,rgba(194,168,120,0.25),transparent_40%),radial-gradient(circle_at_85%_5%,rgba(122,139,107,0.2),transparent_35%),linear-gradient(180deg,#fffdf8_0%,#f6f2e8_100%)] px-4 py-12 md:px-8 md:py-16">
+        <section className="relative overflow-hidden bg-white px-4 py-12 md:px-8 md:py-16">
             <div className="mx-auto max-w-6xl">
                 <div className="mb-10 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-secondary-text">Contacto Wasiq</p>
-                    <h1 className="mt-3 text-3xl font-bold text-text-primary md:text-5xl">Te respondemos rapido y con soluciones claras</h1>
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary md:text-base">
-                        Nuestro equipo de soporte acompana a propietarios e interesados con respuestas agiles,
-                        seguimiento personalizado y atencion humana en cada consulta.
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-500">Contacto Wasiq</p>
+                    <h1 className="mt-3 text-3xl font-bold text-gray-900 md:text-5xl">Te respondemos rápido y con soluciones claras</h1>
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-600 md:text-base">
+                        Nuestro equipo de soporte acompaña a propietarios e interesados con respuestas ágiles,
+                        seguimiento personalizado y atención humana en cada consulta.
                     </p>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-3">
-                    <Card className="border-border-light/70 bg-white/80 backdrop-blur-sm">
+                    <Card className="border-gray-200/70 bg-white/80 backdrop-blur-sm">
                         <CardHeader className="space-y-3">
-                            <Clock3 className="h-6 w-6 text-primary-base" />
+                            <Clock3 className="h-6 w-6 text-orange-500" />
                             <CardTitle>Respuesta eficiente</CardTitle>
                             <CardDescription>Tiempo promedio de primera respuesta menor a 2 horas en horario laboral.</CardDescription>
                         </CardHeader>
                     </Card>
 
-                    <Card className="border-border-light/70 bg-white/80 backdrop-blur-sm">
+                    <Card className="border-gray-200/70 bg-white/80 backdrop-blur-sm">
                         <CardHeader className="space-y-3">
-                            <MessageSquareText className="h-6 w-6 text-primary-base" />
+                            <MessageSquareText className="h-6 w-6 text-orange-500" />
                             <CardTitle>Seguimiento continuo</CardTitle>
                             <CardDescription>Cada caso tiene seguimiento hasta que la consulta quede resuelta.</CardDescription>
                         </CardHeader>
                     </Card>
 
-                    <Card className="border-border-light/70 bg-white/80 backdrop-blur-sm">
+                    <Card className="border-gray-200/70 bg-white/80 backdrop-blur-sm">
                         <CardHeader className="space-y-3">
-                            <ShieldCheck className="h-6 w-6 text-primary-base" />
-                            <CardTitle>Atencion confiable</CardTitle>
-                            <CardDescription>Tratamos tu informacion con cuidado y procesos orientados a seguridad.</CardDescription>
+                            <ShieldCheck className="h-6 w-6 text-orange-500" />
+                            <CardTitle>Atención confiable</CardTitle>
+                            <CardDescription>Tratamos tu información con cuidado y procesos orientados a seguridad.</CardDescription>
                         </CardHeader>
                     </Card>
                 </div>
 
                 <div className="mt-8 grid gap-6 lg:grid-cols-5">
-                    <Card className="border-border-light/80 bg-white lg:col-span-2">
+                    <Card className="border-gray-200/80 bg-white lg:col-span-2">
                         <CardHeader>
                             <CardTitle>Canales de contacto</CardTitle>
-                            <CardDescription>Tambien puedes escribirnos o llamarnos por estos medios.</CardDescription>
+                            <CardDescription>También puedes escribirnos o llamarnos por estos medios.</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-4 text-sm text-text-secondary">
-                            <div className="flex items-start gap-3 rounded-lg border border-border-light/70 p-3">
-                                <Mail className="mt-0.5 h-4 w-4 text-primary-base" />
+                        <CardContent className="space-y-4 text-sm text-gray-600">
+                            <div className="flex items-start gap-3 rounded-lg border border-gray-200/70 p-3">
+                                <Mail className="mt-0.5 h-4 w-4 text-orange-500" />
                                 <div>
-                                    <p className="font-medium text-text-primary">Correo</p>
+                                    <p className="font-medium text-gray-900">Correo</p>
                                     <p>soporte@wasiq.com (temporal)</p>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 rounded-lg border border-border-light/70 p-3">
-                                <Phone className="mt-0.5 h-4 w-4 text-primary-base" />
+                            <div className="flex items-start gap-3 rounded-lg border border-gray-200/70 p-3">
+                                <Phone className="mt-0.5 h-4 w-4 text-orange-500" />
                                 <div>
-                                    <p className="font-medium text-text-primary">Celular / WhatsApp</p>
+                                    <p className="font-medium text-gray-900">Celular / WhatsApp</p>
                                     <p>+51 999 999 999 (temporal)</p>
                                 </div>
                             </div>
-                            <div className="rounded-lg border border-dashed border-primary-base/50 bg-primary-base/5 p-3 text-xs leading-relaxed">
-                                Horario de atencion: Lunes a Viernes, 9:00 am a 7:00 pm.
+                            <div className="rounded-lg border border-dashed border-orange-200 bg-orange-50 p-3 text-xs leading-relaxed">
+                                Horario de atención: Lunes a Viernes, 9:00 am a 7:00 pm.
                             </div>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-border-light/80 bg-white lg:col-span-3">
+                    <Card className="border-gray-200/80 bg-white lg:col-span-3">
                         <CardHeader>
                             <CardTitle>Formulario de contacto</CardTitle>
                             <CardDescription>Cuéntanos tu consulta y te responderemos lo antes posible.</CardDescription>
@@ -211,7 +211,7 @@ export default function ContactPage() {
                                 <Button
                                     type="submit"
                                     disabled={isSending}
-                                    className="h-11 w-full bg-primary-base text-white hover:bg-primary-hover md:w-auto"
+                                    className="h-11 w-full bg-orange-500 text-white hover:bg-orange-600 md:w-auto"
                                 >
                                     <Send className="mr-2 h-4 w-4" />
                                     {isSending ? "Enviando..." : "Enviar mensaje"}

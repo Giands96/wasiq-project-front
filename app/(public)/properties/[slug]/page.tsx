@@ -179,8 +179,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
 
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${property.available
-                                ? 'bg-beige text-primary-button'
-                                : 'bg-neutral-100 text-neutral-500'
+                                ? 'bg-orange-100 text-orange-700'
+                                : 'bg-gray-100 text-gray-500'
                                 }`}>
                                 <p className='text-sm font-regular'>
                                     {property.available ? 'Disponible Ahora' : 'No Disponible'}

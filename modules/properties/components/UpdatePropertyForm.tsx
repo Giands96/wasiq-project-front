@@ -487,7 +487,7 @@ export const UpdatePropertyForm = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-base hover:bg-primary-hover text-white font-medium py-2 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
               >
                 {isSubmitting ? "Actualizando..." : "Actualizar Propiedad"}
               </Button>

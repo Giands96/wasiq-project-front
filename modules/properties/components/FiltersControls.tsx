@@ -87,8 +87,8 @@ function FiltersControls() {
   };
 
   return (
-    <aside className="rounded-2xl border border-border-light bg-white p-5 lg:col-span-3 lg:h-fit">
-      <h2 className="mb-4 text-lg font-semibold text-text-primary">Filtros</h2>
+    <aside className="rounded-2xl border border-gray-200 bg-white p-5 lg:col-span-3 lg:h-fit">
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Filtros</h2>
 
       <div className="my-3">
         <SearchInput />
@@ -99,7 +99,7 @@ function FiltersControls() {
           <Label htmlFor="propertyType">Tipo de propiedad</Label>
           <select
             id="propertyType"
-            className="border-input bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-orange-400 focus-visible:ring-orange-100/50 focus-visible:ring-[3px]"
             {...register("propertyType")}
           >
             <option value="">Todos</option>
@@ -113,7 +113,7 @@ function FiltersControls() {
           <Label htmlFor="operationType">Tipo de operación</Label>
           <select
             id="operationType"
-            className="border-input bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-orange-400 focus-visible:ring-orange-100/50 focus-visible:ring-[3px]"
             {...register("operationType")}
           >
             <option value="">Todos</option>
@@ -145,7 +145,7 @@ function FiltersControls() {
         </div>
 
         <div className="flex gap-2">
-          <Button type="submit" className="flex-1 bg-primary-button">Aplicar</Button>
+          <Button type="submit" className="flex-1 bg-orange-500 hover:bg-orange-600 text-white">Aplicar</Button>
           <Button type="button" variant="outline" className="flex-1" onClick={handleClearFilters}>
             Limpiar
           </Button>

@@ -28,7 +28,7 @@ function SearchInput() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex gap-2">
       <Input placeholder="Buscar propiedades..." {...register("query")} />
-      <Button type="submit" className="bg-primary-button">Buscar</Button>
+      <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">Buscar</Button>
     </form>
   );
 }
