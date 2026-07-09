@@ -57,7 +57,7 @@ export const LoginForm = () => {
             alt="login background"
             fill
             sizes="50vw"
-            quality={100}
+            quality={75}
             priority
             className="object-cover"
           />
