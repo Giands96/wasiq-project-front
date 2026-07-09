@@ -30,7 +30,7 @@ export default function DashboardPieChart({
 
     if (data.length === 0) {
         return (
-            <div className="bg-white border border-gray-100 rounded-2xl p-6">
+            <div className="bg-white border border-gray-100 rounded-2xl p-4 md:p-6">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">
                     {title}
                 </h3>
@@ -42,7 +42,7 @@ export default function DashboardPieChart({
     }
 
     return (
-        <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md transition-shadow duration-300">
+        <div className="bg-white border border-gray-100 rounded-2xl p-4 md:p-6 hover:shadow-md transition-shadow duration-300">
             <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">
                 {title}
             </h3>

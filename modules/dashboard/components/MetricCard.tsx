@@ -22,7 +22,7 @@ export default function MetricCard({
     return (
         <div
             className={`
-                relative rounded-2xl p-6 transition-all duration-300
+                relative rounded-2xl p-4 md:p-6 transition-all duration-300
                 ${
                     isHighlighted
                         ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white shadow-lg shadow-gray-900/20"

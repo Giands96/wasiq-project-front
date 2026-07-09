@@ -38,7 +38,7 @@ export default function DashboardHomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-widest text-primary-button mb-1">
                     Panel de administración
                 </p>
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
                     Bienvenido, {user?.firstName || "Admin"}
                 </h1>
             </div>
@@ -81,7 +81,7 @@ export default function DashboardHomePage() {
             </div>
 
             {/* ── Recent Properties ── */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6">
+            <div className="bg-white border border-gray-100 rounded-2xl p-4 md:p-6">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">
