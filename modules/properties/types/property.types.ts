@@ -66,6 +66,7 @@ export interface CreatePropertyRequest {
     area:number;
     operationType: OperationType;
     propertyType: PropertyType;
+    available: boolean;
     images: File[];
 }
 
@@ -79,6 +80,7 @@ export interface UpdatePropertyRequest {
     area?:number;
     operationType?: OperationType;
     propertyType?: PropertyType;
+    available?: boolean;
     images?: File[];
     keptImageIds?: number[]; // IDs de las imágenes que se desean mantener
 }

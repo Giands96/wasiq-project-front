@@ -18,6 +18,11 @@ const operationTypeOptions = [
     { value: "RENT", label: "Alquiler" },
 ];
 
+const availableOptions = [
+    { value: "true", label: "Publicado" },
+    { value: "false", label: "No publicado" },
+];
+
 export default function DashboardPropertiesPage() {
     const {
         properties,
@@ -27,9 +32,11 @@ export default function DashboardPropertiesPage() {
         propertiesLoading,
         propertyTypeFilter,
         operationTypeFilter,
+        availableFilter,
         fetchProperties,
         setPropertyTypeFilter,
         setOperationTypeFilter,
+        setAvailableFilter,
     } = useDashboardStore();
 
     useEffect(() => {
@@ -69,6 +76,13 @@ export default function DashboardPropertiesPage() {
                     value={operationTypeFilter}
                     onChange={setOperationTypeFilter}
                     allLabel="Todas las operaciones"
+                />
+                <FilterDropdown
+                    label="Publicado"
+                    options={availableOptions}
+                    value={availableFilter === null ? null : String(availableFilter)}
+                    onChange={(val) => setAvailableFilter(val === null ? null : val === "true")}
+                    allLabel="Todos los estados"
                 />
             </div>
 

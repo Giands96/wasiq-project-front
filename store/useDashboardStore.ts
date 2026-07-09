@@ -23,6 +23,7 @@ interface DashboardState {
     propertiesLoading: boolean;
     propertyTypeFilter: string | null;
     operationTypeFilter: string | null;
+    availableFilter: boolean | null;          // null=todas, true=solo disponibles, false=solo no disponibles
 
     // ── Métricas (derivadas de los fetches iniciales) ──
     metricsLoading: boolean;
@@ -40,6 +41,7 @@ interface DashboardState {
     setUserOrderDesc: (desc: boolean) => void;
     setPropertyTypeFilter: (type: string | null) => void;
     setOperationTypeFilter: (type: string | null) => void;
+    setAvailableFilter: (available: boolean | null) => void;
 }
 
 export const useDashboardStore = create<DashboardState>((set, get) => ({
@@ -60,6 +62,7 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
     propertiesLoading: false,
     propertyTypeFilter: null,
     operationTypeFilter: null,
+    availableFilter: null,
 
     //Estado inicial Métricas
     metricsLoading: false,
@@ -95,13 +98,13 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
         }
     },
 
-    // ── FETCH PROPIEDADES ──
+    // ── FETCH PROPIEDADES (usa endpoint admin) ──
     fetchProperties: async (page = 0, size = 8) => {
         set({ propertiesLoading: true });
         try {
-            const { propertyTypeFilter, operationTypeFilter } = get();
+            const { propertyTypeFilter, operationTypeFilter, availableFilter } = get();
 
-            const response = await PropertyService.getPropertiesList({
+            const response = await PropertyService.getAdminProperties({
                 page,
                 size,
                 propertyType: propertyTypeFilter || undefined,
@@ -109,8 +112,14 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
                 sort: "id,desc",
             });
 
+            // Filtro local de available (si el backend no lo soporta en query params)
+            let filtered = response.content;
+            if (availableFilter !== null) {
+                filtered = filtered.filter((p) => p.available === availableFilter);
+            }
+
             set({
-                properties: response.content,
+                properties: filtered,
                 propertiesPage: response.number,
                 propertiesTotalPages: response.totalPages,
                 propertiesTotalElements: response.totalElements,
@@ -129,7 +138,7 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
             // Obtener todos los datos con un tamaño grande para calcular métricas
             const [usersRes, propertiesRes] = await Promise.all([
                 userService.getUsersDesc({ page: 0, size: 1 }),
-                PropertyService.getPropertiesList({ page: 0, size: 100, sort: "id,desc" }),
+                PropertyService.getAdminProperties({ page: 0, size: 100, sort: "id,desc" }),
             ]);
 
             const allProperties = propertiesRes.content;
@@ -196,6 +205,11 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
 
     setOperationTypeFilter: (type) => {
         set({ operationTypeFilter: type, propertiesPage: 0 });
+        get().fetchProperties(0);
+    },
+
+    setAvailableFilter: (available) => {
+        set({ availableFilter: available, propertiesPage: 0 });
         get().fetchProperties(0);
     },
 }));

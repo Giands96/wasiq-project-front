@@ -64,7 +64,10 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                             Baños
                         </th>
                         <th className="text-center py-3 px-4 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-                            Estado
+                            Activo
+                        </th>
+                        <th className="text-center py-3 px-4 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+                            Publicado
                         </th>
                     </tr>
                 </thead>
@@ -130,14 +133,27 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                                 </span>
                             </td>
 
-                            {/* Estado */}
+                            {/* Active (soft-delete) */}
                             <td className="py-3.5 px-4 text-center">
                                 <span
                                     className={`inline-block w-2 h-2 rounded-full ${
                                         property.active ? "bg-status-success" : "bg-gray-300"
                                     }`}
-                                    title={property.active ? "Activa" : "Inactiva"}
+                                    title={property.active ? "Activa" : "Eliminada"}
                                 />
+                            </td>
+
+                            {/* Available (publicado) */}
+                            <td className="py-3.5 px-4">
+                                <span
+                                    className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${
+                                        property.available
+                                            ? "bg-green-50 text-green-700 border border-green-200"
+                                            : "bg-gray-50 text-gray-500 border border-gray-200"
+                                    }`}
+                                >
+                                    {property.available ? "Publicado" : "No publicado"}
+                                </span>
                             </td>
                         </tr>
                     ))}

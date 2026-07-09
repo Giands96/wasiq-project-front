@@ -40,6 +40,8 @@ export const API_ENDPOINTS = {
         DELETE: (slug: string) => `/properties/delete/${slug}`,
         BY_SLUG: (slug: string) => `/properties/slug/${slug}`,
         GET_ALL: '/properties/',
+        ADMIN_LIST: '/properties/admin',              // Dashboard admin
+        ADMIN_BY_SLUG: (slug: string) => `/properties/admin/${slug}`,  // Dashboard admin detail
     },
     USERS: {
         GET_ALL: '/users/all',

@@ -108,6 +108,26 @@ export const PropertyService = {
         return null;
       }
     },
+  // ── Admin: todas las propiedades (incluyendo no disponibles) ──
+  getAdminProperties: async (
+    params?: PropertyPaginationParams,
+  ): Promise<PaginatedResponse<Property>> => {
+    const { data } = await api.get<PaginatedResponse<Property>>(
+      API_ENDPOINTS.PROPERTIES.ADMIN_LIST,
+      { params },
+    );
+    return data;
+  },
+
+  getAdminPropertyBySlug: async (slug: string): Promise<Property | null> => {
+    try {
+      const { data } = await api.get<Property>(API_ENDPOINTS.PROPERTIES.ADMIN_BY_SLUG(slug));
+      return data;
+    } catch {
+      return null;
+    }
+  },
+
   getPropertyByTitle: async (params?: PropertyPaginationParams & {query?: string}): Promise<PaginatedResponse<Property>> => {
     try {
       const { data } = await api.get<PaginatedResponse<Property>>(
