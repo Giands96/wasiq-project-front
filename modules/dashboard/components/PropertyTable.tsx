@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { Property } from "@/modules/properties/types/property.types";
 import { useDashboardStore } from "@/store/useDashboardStore";
-import { Building2, MapPin, Bed, Bath, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { Building2, MapPin, Bed, Bath, Trash2, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 
 interface PropertyTableProps {
@@ -158,13 +159,22 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                                     </span>
                                 </td>
                                 <td className="py-3.5 px-4 text-center">
-                                    <button
-                                        onClick={() => setConfirmDeleteSlug(property.slug)}
-                                        className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
-                                        title="Eliminar"
-                                    >
-                                        <Trash2 size={16} />
-                                    </button>
+                                    <div className="flex items-center justify-center gap-1">
+                                        <Link
+                                            href={`/properties/${property.slug}`}
+                                            className="p-2 rounded-lg text-gray-400 hover:text-primary-button hover:bg-primary-button/5 transition-colors cursor-pointer"
+                                            title="Ir a la propiedad"
+                                        >
+                                            <ExternalLink size={16} />
+                                        </Link>
+                                        <button
+                                            onClick={() => setConfirmDeleteSlug(property.slug)}
+                                            className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                                            title="Eliminar"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -190,15 +200,24 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                                     {property.address}
                                 </p>
                             </div>
-                            {property.active && (
-                                <button
-                                    onClick={() => setConfirmDeleteSlug(property.slug)}
-                                    className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer flex-shrink-0"
-                                    title="Eliminar"
+                            <div className="flex items-center gap-1 flex-shrink-0">
+                                <Link
+                                    href={`/properties/${property.slug}`}
+                                    className="p-2 rounded-lg text-gray-400 hover:text-primary-button hover:bg-primary-button/5 transition-colors cursor-pointer"
+                                    title="Ir a la propiedad"
                                 >
-                                    <Trash2 size={16} />
-                                </button>
-                            )}
+                                    <ExternalLink size={16} />
+                                </Link>
+                                {property.active && (
+                                    <button
+                                        onClick={() => setConfirmDeleteSlug(property.slug)}
+                                        className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                                        title="Eliminar"
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                         {/* Badges */}
