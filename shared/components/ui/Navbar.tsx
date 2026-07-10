@@ -74,7 +74,7 @@ const UserMenu = () => {
 
 const MobileMenu = () => {
   const { logout } = useLogout();
-
+  const { user } = useAuthStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -88,6 +88,16 @@ const MobileMenu = () => {
             <Home className="mr-2 h-4 w-4" /> Inicio
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild className="cursor-pointer">
+            <Link href={ROUTES.AUTH.MY_PROFILE}>
+              <User className="mr-2 h-4 w-4" /> Perfil
+            </Link>
+          </DropdownMenuItem>
+          {(user?.role === "ADMIN") && (<DropdownMenuItem asChild className="cursor-pointer">
+            <Link href={ROUTES.DASHBOARD.HOME}>
+              <ShieldUser className="mr-2 h-4 w-4" /> Dashboard Admin.
+            </Link>
+          </DropdownMenuItem>)}
         {/* asChild es */ }
         <DropdownMenuItem asChild>
           <Link href={ROUTES.PROPERTIES.LIST} className="cursor-pointer">

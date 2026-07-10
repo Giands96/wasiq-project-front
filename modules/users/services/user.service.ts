@@ -31,4 +31,27 @@ export const userService = {
         );
         return data;
     },
+
+    // Cambiar el rol de un usuario
+    updateUserRole: async (id: number, role: Role): Promise<User> => {
+        const { data } = await api.put<User>(
+            API_ENDPOINTS.USERS.UPDATE_ROLE(id),
+            { role }
+        );
+        return data;
+    },
+
+    // Activar o desactivar un usuario
+    updateUserStatus: async (id: number, active: boolean): Promise<User> => {
+        const { data } = await api.put<User>(
+            API_ENDPOINTS.USERS.UPDATE_STATUS(id),
+            { active }
+        );
+        return data;
+    },
+
+    // Eliminar un usuario (soft delete)
+    deleteUser: async (id: number): Promise<void> => {
+        await api.delete(API_ENDPOINTS.USERS.DELETE(id));
+    },
 };

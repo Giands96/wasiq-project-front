@@ -87,7 +87,7 @@ export default function DashboardPropertiesPage() {
             </div>
 
             {/* ── Tabla ── */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6">
+            <div className="bg-white border border-gray-100 rounded-2xl p-4 md:p-6">
                 <PropertyTable properties={properties} isLoading={propertiesLoading} />
                 <PaginationControls
                     currentPage={propertiesPage}

@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Property } from "@/modules/properties/types/property.types";
-import { Building2, MapPin, Bed, Bath } from "lucide-react";
+import { useDashboardStore } from "@/store/useDashboardStore";
+import { Building2, MapPin, Bed, Bath, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface PropertyTableProps {
     properties: Property[];
@@ -21,6 +23,9 @@ const opLabels: Record<string, string> = {
 };
 
 export default function PropertyTable({ properties, isLoading }: PropertyTableProps) {
+    const { deleteProperty } = useDashboardStore();
+    const [confirmDeleteSlug, setConfirmDeleteSlug] = useState<string | null>(null);
+
     if (isLoading) {
         return (
             <div className="space-y-3">
@@ -39,6 +44,13 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
             </div>
         );
     }
+
+    const handleDelete = async (slug: string) => {
+        setConfirmDeleteSlug(null);
+        const ok = await deleteProperty(slug);
+        if (ok) toast.success("Propiedad eliminada");
+        else toast.error("Error al eliminar la propiedad");
+    };
 
     return (
         <>
@@ -70,6 +82,9 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                             </th>
                             <th className="text-center py-3 px-4 text-[11px] font-bold uppercase tracking-widest text-gray-400">
                                 Publicado
+                            </th>
+                            <th className="text-center py-3 px-4 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+                                Acciones
                             </th>
                         </tr>
                     </thead>
@@ -142,6 +157,15 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                                         {property.available ? "Publicado" : "No publicado"}
                                     </span>
                                 </td>
+                                <td className="py-3.5 px-4 text-center">
+                                    <button
+                                        onClick={() => setConfirmDeleteSlug(property.slug)}
+                                        className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                                        title="Eliminar"
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -155,15 +179,26 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                         key={property.id}
                         className="bg-gray-50/70 rounded-xl p-4 border border-gray-100"
                     >
-                        {/* Title + address */}
-                        <div className="mb-3">
-                            <p className="text-sm font-semibold text-gray-800 truncate">
-                                {property.title}
-                            </p>
-                            <p className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
-                                <MapPin size={11} />
-                                {property.address}
-                            </p>
+                        {/* Title + address + delete */}
+                        <div className="flex items-start justify-between mb-3">
+                            <div className="min-w-0 flex-1">
+                                <p className="text-sm font-semibold text-gray-800 truncate">
+                                    {property.title}
+                                </p>
+                                <p className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
+                                    <MapPin size={11} />
+                                    {property.address}
+                                </p>
+                            </div>
+                            {property.active && (
+                                <button
+                                    onClick={() => setConfirmDeleteSlug(property.slug)}
+                                    className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer flex-shrink-0"
+                                    title="Eliminar"
+                                >
+                                    <Trash2 size={16} />
+                                </button>
+                            )}
                         </div>
 
                         {/* Badges */}
@@ -222,6 +257,43 @@ export default function PropertyTable({ properties, isLoading }: PropertyTablePr
                     </div>
                 ))}
             </div>
+
+            {/* ── Confirm delete modal ── */}
+            {confirmDeleteSlug !== null && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+                    onClick={() => setConfirmDeleteSlug(null)}
+                >
+                    <div
+                        className="bg-white rounded-2xl p-6 max-w-sm mx-4 shadow-xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                                <Trash2 size={20} className="text-red-500" />
+                            </div>
+                            <h3 className="text-base font-bold text-gray-900">Eliminar propiedad</h3>
+                        </div>
+                        <p className="text-sm text-gray-500 mb-6">
+                            Esta acción desactivará la propiedad. No se puede deshacer.
+                        </p>
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setConfirmDeleteSlug(null)}
+                                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={() => handleDelete(confirmDeleteSlug)}
+                                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

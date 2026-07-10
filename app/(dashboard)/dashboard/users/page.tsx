@@ -9,6 +9,7 @@ import { Users } from "lucide-react";
 
 const roleOptions = [
     { value: "ADMIN", label: "Administradores" },
+    { value: "MOD", label: "Moderadores" },
     { value: "USER", label: "Usuarios" },
 ];
 
@@ -58,7 +59,7 @@ export default function DashboardUsersPage() {
             </div>
 
             {/* ── Tabla ── */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6">
+            <div className="bg-white border border-gray-100 rounded-2xl p-4 md:p-6">
                 <UserTable users={users} isLoading={usersLoading} />
                 <PaginationControls
                     currentPage={usersPage}

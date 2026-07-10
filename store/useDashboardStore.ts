@@ -42,6 +42,10 @@ interface DashboardState {
     setPropertyTypeFilter: (type: string | null) => void;
     setOperationTypeFilter: (type: string | null) => void;
     setAvailableFilter: (available: boolean | null) => void;
+    updateUserRole: (id: number, role: Role) => Promise<boolean>;
+    updateUserStatus: (id: number, active: boolean) => Promise<boolean>;
+    deleteUser: (id: number) => Promise<boolean>;
+    deleteProperty: (slug: string) => Promise<boolean>;
 }
 
 export const useDashboardStore = create<DashboardState>((set, get) => ({
@@ -211,5 +215,61 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
     setAvailableFilter: (available) => {
         set({ availableFilter: available, propertiesPage: 0 });
         get().fetchProperties(0);
+    },
+
+    // ── ACCIONES DE GESTIÓN ──
+
+    updateUserRole: async (id, role) => {
+        try {
+            const updated = await userService.updateUserRole(id, role);
+            set((state) => ({
+                users: state.users.map((u) => (u.id === id ? { ...u, role: updated.role } : u)),
+            }));
+            return true;
+        } catch (error) {
+            console.error("Error updating user role:", error);
+            return false;
+        }
+    },
+
+    updateUserStatus: async (id, active) => {
+        try {
+            const updated = await userService.updateUserStatus(id, active);
+            set((state) => ({
+                users: state.users.map((u) => (u.id === id ? { ...u, active: updated.active } : u)),
+            }));
+            return true;
+        } catch (error) {
+            console.error("Error updating user status:", error);
+            return false;
+        }
+    },
+
+    deleteUser: async (id) => {
+        try {
+            await userService.deleteUser(id);
+            set((state) => ({
+                users: state.users.filter((u) => u.id !== id),
+                usersTotalElements: state.usersTotalElements - 1,
+            }));
+            return true;
+        } catch (error) {
+            console.error("Error deleting user:", error);
+            return false;
+        }
+    },
+
+    deleteProperty: async (slug) => {
+        try {
+            await PropertyService.deleteProperty(slug);
+            set((state) => ({
+                properties: state.properties.filter((p) => p.slug !== slug),
+                propertiesTotalElements: state.propertiesTotalElements - 1,
+            }));
+            return true;
+        } catch (error) {
+            console.error("Error deleting property:", error);
+            return false;
+        }
     },
 }));
