@@ -7,6 +7,7 @@ import { Bed, Bath, Maximize, MapPin, User, ExternalLink, Share2, Heart, Home } 
 import { PropertyOwnerControls } from '@/modules/properties/components/PropertyOwnerControls';
 import { ForAuthenticatedUser } from '@/modules/properties/components/ForAuthenticatedUser';
 import { ImageGallery } from '@/modules/properties/components/ImageGallery';
+import { PreviewProperties } from '@/modules/properties/components/PreviewProperties';
 
 interface PropertyDetailsPageProps {
     params: {
@@ -139,7 +140,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
 
                     {/* Columna derecha - Card de contacto y precio */}
                     <div className='lg:col-span-1'>
-                        <div className='bg-white rounded-lg p-6 shadow-sm sticky top-6 space-y-6'>
+                        <div className='bg-white rounded-lg p-6 shadow-sm sticky top-10 space-y-6'>
                             {/* Precio y tipo */}
                             <div>
                                 <div className='flex items-baseline justify-between mb-2'>
@@ -188,8 +189,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
+
+        <PreviewProperties title="Más propiedades" description="¿Quieres nuevas opciones? Aquí te las presentamos"/>
+    </div>
     );
 }

@@ -21,6 +21,8 @@ const UserMenu = () => {
   const { logout } = useLogout();
 
   return (
+    
+
     <div className="flex">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -29,7 +31,6 @@ const UserMenu = () => {
               <User size={18} />
             </div>
             <span className="text-sm font-medium text-gray-700">
-              {/* Si Zustand aún no hidrata, mostramos "Mi Perfil" de forma segura */}
               {user ? `${user.firstName} ${user.lastName}` : "Mi Perfil"}
             </span>
             <Menu className="w-4 h-4 text-gray-500" />
