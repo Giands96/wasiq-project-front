@@ -23,7 +23,7 @@ function getRoleBadgeClass(role: string): string {
 }
 
 export default function UserTable({ users, isLoading }: UserTableProps) {
-    const { updateUserRole, updateUserStatus, deleteUser } = useDashboardStore();
+    const { updateUserRole, toggleUserStatus, deleteUser } = useDashboardStore();
     const { user: currentUser } = useAuthStore();
     const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
     const [roleOpenId, setRoleOpenId] = useState<number | null>(null);
@@ -54,9 +54,9 @@ export default function UserTable({ users, isLoading }: UserTableProps) {
         else toast.error("Error al actualizar el rol");
     };
 
-    const handleStatusToggle = async (userId: number, currentActive: boolean) => {
-        const ok = await updateUserStatus(userId, !currentActive);
-        if (ok) toast.success(!currentActive ? "Usuario activado" : "Usuario desactivado");
+    const handleStatusToggle = async (userId: number) => {
+        const ok = await toggleUserStatus(userId);
+        if (ok) toast.success("Estado del usuario actualizado");
         else toast.error("Error al cambiar el estado");
     };
 
@@ -109,7 +109,7 @@ export default function UserTable({ users, isLoading }: UserTableProps) {
         return (
             <div className="flex items-center justify-center gap-2">
                 <button
-                    onClick={() => handleStatusToggle(user.id, user.active)}
+                    onClick={() => handleStatusToggle(user.id)}
                     className={`p-2 rounded-lg transition-colors cursor-pointer ${user.active ? "text-green-600 hover:bg-green-50" : "text-red-500 hover:bg-red-50"}`}
                     title={user.active ? "Desactivar" : "Activar"}
                 >

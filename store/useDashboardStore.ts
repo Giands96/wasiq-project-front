@@ -43,7 +43,7 @@ interface DashboardState {
     setOperationTypeFilter: (type: string | null) => void;
     setAvailableFilter: (available: boolean | null) => void;
     updateUserRole: (id: number, role: Role) => Promise<boolean>;
-    updateUserStatus: (id: number, active: boolean) => Promise<boolean>;
+    toggleUserStatus: (id: number) => Promise<boolean>;
     deleteUser: (id: number) => Promise<boolean>;
     deleteProperty: (slug: string) => Promise<boolean>;
 }
@@ -232,18 +232,25 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
         }
     },
 
-    updateUserStatus: async (id, active) => {
+    toggleUserStatus: async (id) => {
+        const user = get().users.find((u) => u.id === id);
+        if (!user) {
+            console.error("User not found:", id);
+            return false;
+        }
         try {
-            const updated = await userService.updateUserStatus(id, active);
+            const updated = await userService.updateUserStatus(id, !user.active);
             set((state) => ({
                 users: state.users.map((u) => (u.id === id ? { ...u, active: updated.active } : u)),
             }));
             return true;
         } catch (error) {
-            console.error("Error updating user status:", error);
+            console.error("Error toggling user status:", error);
             return false;
         }
     },
+    
+
 
     deleteUser: async (id) => {
         try {
