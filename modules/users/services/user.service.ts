@@ -23,6 +23,11 @@ export const userService = {
         return data;
     },
 
+    getUserById: async (id:number): Promise<User> => {
+        const { data } = await api.get<User>(API_ENDPOINTS.USERS.GET_BY_ID(id));
+        return data;
+    },
+
     // Filtrar usuarios por rol
     getUsersByRole: async (role: Role, params?: UserPaginationParams): Promise<PaginatedResponse<User>> => {
         const { data } = await api.get<PaginatedResponse<User>>(

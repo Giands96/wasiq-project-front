@@ -48,6 +48,7 @@ export const API_ENDPOINTS = {
         GET_BY_ROLE: (role: string) => `/users/by-role/${role}`,
         UPDATE_ROLE: (id: number) => `/users/${id}/role`,
         UPDATE_STATUS: (id: number) => `/users/${id}/status`,
-        DELETE: (id: number) => `/users/${id}`,
+        DELETE: (id: number) => `/id/${id}`,
+        GET_BY_ID: (id: number) => `/users/${id}`,
     },
 };
