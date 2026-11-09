@@ -52,7 +52,7 @@ function Services() {
               <div
                 key={index}
                 className="service-card group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col items-center text-center scroll-reveal"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{ "--reveal-delay": `${index * 80}ms` } as React.CSSProperties}
               >
                 {/* Icono con fondo y animación */}
                 <div className="mb-6 relative">
@@ -73,30 +73,6 @@ function Services() {
             ))}
           </div>
         </div>
-
-        <style jsx>{`
-          @keyframes fadeUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .scroll-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          }
-
-          .service-card {
-            --delay: 0s;
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) forwards;
-          }
-        `}</style>
       </section>
     );
 

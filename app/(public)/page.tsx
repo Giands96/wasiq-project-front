@@ -10,6 +10,7 @@ import Hero from "@/shared/components/ui/home/hero";
 import About from "@/shared/components/ui/home/about";
 import Services from "@/shared/components/ui/home/services";
 import { PreviewProperties } from "@/modules/properties/components/PreviewProperties";
+import { useScrollReveal } from "@/shared/hooks/useScrollReveal";
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -24,28 +25,7 @@ function HomeContent() {
     }
   }, [isExpired, router]);
 
-  // Scroll reveal observer
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  useScrollReveal();
 
   return (
     <main className="w-full bg-white text-[#111827]">

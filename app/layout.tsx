@@ -4,6 +4,7 @@ import "./globals.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -17,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en" data-scroll-behavior="smooth">
-      <body className={`${manrope.className} antialiased`}>
+    <html suppressHydrationWarning lang="es" data-scroll-behavior="smooth">
+      <body className={`${manrope.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
