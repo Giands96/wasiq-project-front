@@ -104,7 +104,8 @@ export const PropertyService = {
       try {
         const { data } = await api.get<Property>(API_ENDPOINTS.PROPERTIES.BY_SLUG(slug)); 
         return data;
-      } catch {
+      } catch (error) {
+        console.error(`[PropertyService] getPropertyBySlug("${slug}") failed`, error);
         return null;
       }
     },
