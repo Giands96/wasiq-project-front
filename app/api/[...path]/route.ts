@@ -18,7 +18,10 @@ const proxyRequest = async (
   }
 
   const { path } = await params;
-  const targetUrl = `${apiUrl}/${path.join("/")}${request.nextUrl.search}`;
+  const backendPath = path.join("/");
+  const normalizedPath =
+    backendPath === "properties" ? `${backendPath}/` : backendPath;
+  const targetUrl = `${apiUrl}/${normalizedPath}${request.nextUrl.search}`;
   const headers = new Headers();
   const contentType = request.headers.get("content-type");
   const cookie = request.headers.get("cookie");
