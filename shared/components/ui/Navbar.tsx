@@ -65,7 +65,7 @@ const UserMenu = () => {
 
       <Link
         href={ROUTES.PROPERTIES.CREATE}
-        className="ml-4 px-3 flex items-center justify-center text-white bg-orange-500 rounded-full hover:bg-orange-600 transition-all text-md"
+        className="ml-4 px-3 flex items-center justify-center text-white bg-primary rounded-full hover:bg-primary-hover transition-all text-sm"
       >
         <House className="mr-2 h-4 w-4" /> Publicar Propiedad
       </Link>
@@ -139,7 +139,7 @@ export const Navbar = ({ serverIsAuthenticated }: NavbarProps) => {
 
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-gray-800 tracking-tight">
-          Wasiq<span className="text-orange-600">.</span>
+          Wasiq<span className="text-primary">.</span>
         </Link>
 
         {/* Links de Navegación — Desktop */}

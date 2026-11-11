@@ -105,7 +105,7 @@ export default function MyProfilePage() {
 
   if (!_hasHydrated) {
     return (
-      <div className="min-h-screen p-4 md:p-8 bg-linear-to-tr from-beige to-orange-500/4">
+      <div className="min-h-screen p-4 md:p-8 bg-background">
         <Card className="max-w-3xl mx-auto">
           <CardContent className="py-8 text-sm text-neutral-500">Cargando perfil...</CardContent>
         </Card>
@@ -114,7 +114,7 @@ export default function MyProfilePage() {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8 bg-linear-to-tr from-beige to-orange-500/4">
+    <div className="min-h-screen p-4 md:p-8 bg-background">
       <Card className="max-w-3xl mx-auto shadow-sm border-neutral-200">
         <CardHeader>
           <CardTitle className="text-2xl">
@@ -225,7 +225,7 @@ export default function MyProfilePage() {
               <Button
                 type="submit"
                 disabled={isSaving || !hasChanges}
-                className="w-full md:w-auto bg-beige-dark text-neutral-700 hover:bg-beige-dark"
+                className="w-full md:w-auto bg-secondary text-neutral-700 hover:bg-secondary"
               >
                 {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {isSaving ? "Guardando cambios..." : "Guardar cambios"}

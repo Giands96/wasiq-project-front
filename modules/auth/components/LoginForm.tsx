@@ -148,7 +148,7 @@ export const LoginForm = () => {
                   {/* SUBMIT */}
                   <Button
                     type="submit"
-                    className="w-full bg-beige-dark hover:shadow-sm hover:bg-beige-dark hover:cursor-pointer transition-all text-neutral-700"
+                    className="w-full bg-secondary hover:shadow-sm hover:bg-secondary hover:cursor-pointer transition-all text-neutral-700"
                     disabled={isLoading}
                   >
                     {isLoading && (
@@ -160,7 +160,7 @@ export const LoginForm = () => {
                   {/* SIGN UP */}
                   <p className="text-center text-sm text-muted-foreground">
                     ¿No tienes cuenta?{" "}
-                    <Link href={ROUTES.AUTH.REGISTER} className="text-primary-button hover:underline">
+                    <Link href={ROUTES.AUTH.REGISTER} className="text-primary hover:underline">
                       Regístrate aquí
                     </Link>
                   </p>

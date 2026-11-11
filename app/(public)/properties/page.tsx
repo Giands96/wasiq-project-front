@@ -76,7 +76,7 @@ function PropertiesContent() {
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <button
                     disabled={currentPage === 0}
-                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-primary/30 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Anterior
                   </button>
@@ -87,7 +87,7 @@ function PropertiesContent() {
 
                   <button
                     disabled={currentPage + 1 >= totalPages}
-                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-primary/30 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Siguiente
                   </button>
@@ -107,7 +107,7 @@ function PropertiesContent() {
 
 export default function PropertiesPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-bg-main p-12 text-center text-text-secondary">Cargando la página de propiedades...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-background p-12 text-center text-muted-foreground">Cargando la página de propiedades...</div>}>
       <PropertiesContent />
     </Suspense>
   );

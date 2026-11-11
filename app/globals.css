@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import 'tailwind-animations';
@@ -83,7 +83,7 @@
   --primary-foreground: #FFFFFF;
   --primary-hover: #173D2E;
   --primary-soft: #E7F0EA;
-  --primary-bright: #1F4D3A;
+  --primary-bright: #7FBF9C;
   --secondary: #F5F5F5;
   --secondary-foreground: #171717;
   --muted: #F5F5F5;

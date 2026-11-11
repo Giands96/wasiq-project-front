@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import HeroImage from "@/public/herobg.webp";
 import Link from "next/link";
 import Image from "next/image";
@@ -24,7 +24,7 @@ function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Badge */}
         <div className="inline-flex items-center justify-center mb-6 animate-fade-in">
-          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-orange-300 opacity-90">
+          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-primary-foreground opacity-90">
             Desde Wasiq
           </p>
         </div>
@@ -52,7 +52,7 @@ function Hero() {
         >
           <Link
             href="/properties"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-hover transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap"
           >
             Ver propiedades
           </Link>

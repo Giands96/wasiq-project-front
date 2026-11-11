@@ -11,6 +11,7 @@ import About from "@/shared/components/ui/home/about";
 import Services from "@/shared/components/ui/home/services";
 import { PreviewProperties } from "@/modules/properties/components/PreviewProperties";
 import { useScrollReveal } from "@/shared/hooks/useScrollReveal";
+import { PhotoSphere } from "@/shared/components/PhotoSphere";
 
 function HomeContent() {
   const searchParams = useSearchParams();

@@ -51,13 +51,13 @@ function Services() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="service-card group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col items-center text-center scroll-reveal"
+                className="service-card group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary-soft transition-all duration-300 flex flex-col items-center text-center scroll-reveal"
                 style={{ "--reveal-delay": `${index * 80}ms` } as React.CSSProperties}
               >
                 {/* Icono con fondo y animación */}
                 <div className="mb-6 relative">
-                  <div className="absolute inset-0 bg-orange-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-                  <service.icon className="w-12 h-12 text-orange-500 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-primary-soft rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+                  <service.icon className="w-12 h-12 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300" />
                 </div>
 
                 {/* Título */}

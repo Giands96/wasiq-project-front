@@ -47,7 +47,7 @@ export const PreviewProperties = (text:{ title: string; description: string }) =
           </div>
           <Link
             href={ROUTES.PROPERTIES.LIST}
-            className="inline-flex items-center justify-center rounded-full border border-orange-500 bg-transparent px-6 py-2.5 text-sm font-semibold text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white whitespace-nowrap"
+            className="inline-flex items-center justify-center rounded-full border border-primary bg-transparent px-6 py-2.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white whitespace-nowrap"
           >
             Ver todas
           </Link>

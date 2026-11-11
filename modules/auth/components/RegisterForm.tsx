@@ -160,7 +160,7 @@ export const RegisterForm = () => {
 
                   <Button
                     type="submit"
-                    className="w-full bg-beige-dark hover:shadow-sm hover:bg-beige-dark hover:cursor-pointer transition-all text-neutral-700"
+                    className="w-full bg-secondary hover:shadow-sm hover:bg-secondary hover:cursor-pointer transition-all text-neutral-700"
                     disabled={isLoading}
                   >
                     {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -169,7 +169,7 @@ export const RegisterForm = () => {
 
                   <p className="text-center text-sm text-muted-foreground">
                     ¿Ya tienes cuenta?{" "}
-                    <Link href={ROUTES.AUTH.LOGIN} className="text-primary-button hover:underline">
+                    <Link href={ROUTES.AUTH.LOGIN} className="text-primary hover:underline">
                       Inicia sesión
                     </Link>
                   </p>

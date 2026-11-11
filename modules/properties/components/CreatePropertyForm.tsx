@@ -121,7 +121,7 @@ export const CreatePropertyForm = () => {
                         <FormControl>
                           <Input
                             placeholder="Ej: Casa moderna con jardín en San Isidro"
-                            className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                            className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                             {...field}
                           />
                         </FormControl>
@@ -142,7 +142,7 @@ export const CreatePropertyForm = () => {
                         <FormControl>
                           <Textarea
                             placeholder="Describe los detalles, amenidades y características especiales de la propiedad..."
-                            className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500 resize-none"
+                            className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary resize-none"
                             rows={4}
                             {...field}
                           />
@@ -171,7 +171,7 @@ export const CreatePropertyForm = () => {
                       <FormControl>
                         <Input
                           placeholder="Ej: Avenida Paseo de la República 3000"
-                          className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                          className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                           {...field}
                         />
                       </FormControl>
@@ -193,7 +193,7 @@ export const CreatePropertyForm = () => {
                         <Input
                           type="number"
                           placeholder="0"
-                          className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                          className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                           {...field}
                           onChange={(e) => {
                             const value = parseFloat(e.target.value);
@@ -231,7 +231,7 @@ export const CreatePropertyForm = () => {
                           <Input
                             type="number"
                             placeholder="0"
-                            className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                            className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                             {...field}
                             onChange={(e) => {
                               const value = parseFloat(e.target.value);
@@ -261,7 +261,7 @@ export const CreatePropertyForm = () => {
                           <Input
                             type="number"
                             placeholder="0"
-                            className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                            className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                             {...field}
                             onChange={(e) => {
                               const value = parseFloat(e.target.value);
@@ -291,7 +291,7 @@ export const CreatePropertyForm = () => {
                           <Input
                             type="number"
                             placeholder="0"
-                            className="mt-1.5 rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500"
+                            className="mt-1.5 rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
                             {...field}
                             onChange={(e) => {
                               const value = parseFloat(e.target.value);
@@ -328,7 +328,7 @@ export const CreatePropertyForm = () => {
                         </FormLabel>
                         <FormControl>
                           <select
-                            className="mt-1.5 w-full h-10 px-3 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                            className="mt-1.5 w-full h-10 px-3 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             {...field}
                           >
                             <option value="HOUSE">Casa</option>
@@ -352,7 +352,7 @@ export const CreatePropertyForm = () => {
                         </FormLabel>
                         <FormControl>
                           <select
-                            className="mt-1.5 w-full h-10 px-3 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                            className="mt-1.5 w-full h-10 px-3 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             {...field}
                           >
                             <option value="SALE">Venta</option>
@@ -381,7 +381,7 @@ export const CreatePropertyForm = () => {
                       </FormLabel>
                       <FormControl>
                         <div className="mt-2">
-                          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 hover:bg-orange-50 transition-all duration-200 p-4">
+                          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-primary-soft transition-all duration-200 p-4">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
                               <svg
                                 className="w-8 h-8 text-gray-400 mb-2"
@@ -442,7 +442,7 @@ export const CreatePropertyForm = () => {
                             {field.value.map((img, index) => (
                               <div
                                 key={index}
-                                className="relative group rounded-lg overflow-hidden border border-gray-200 hover:border-orange-500 transition-all duration-200"
+                                className="relative group rounded-lg overflow-hidden border border-gray-200 hover:border-primary transition-all duration-200"
                               >
                                 <img
                                   src={URL.createObjectURL(img)}
@@ -480,7 +480,7 @@ export const CreatePropertyForm = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed text-sm sm:text-base"
+                  className="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
