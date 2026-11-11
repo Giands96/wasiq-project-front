@@ -99,7 +99,7 @@ function FiltersControls() {
           <Label htmlFor="propertyType">Tipo de propiedad</Label>
           <select
             id="propertyType"
-            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-orange-400 focus-visible:ring-orange-100/50 focus-visible:ring-[3px]"
+            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-primary focus-visible:ring-primary/20 focus-visible:ring-[3px]"
             {...register("propertyType")}
           >
             <option value="">Todos</option>
@@ -113,7 +113,7 @@ function FiltersControls() {
           <Label htmlFor="operationType">Tipo de operación</Label>
           <select
             id="operationType"
-            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-orange-400 focus-visible:ring-orange-100/50 focus-visible:ring-[3px]"
+            className="border-gray-200 bg-transparent h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-primary focus-visible:ring-primary/20 focus-visible:ring-[3px]"
             {...register("operationType")}
           >
             <option value="">Todos</option>
@@ -145,7 +145,7 @@ function FiltersControls() {
         </div>
 
         <div className="flex gap-2">
-          <Button type="submit" className="flex-1 bg-orange-500 hover:bg-orange-600 text-white">Aplicar</Button>
+          <Button type="submit" className="flex-1 bg-primary hover:bg-primary-hover text-white">Aplicar</Button>
           <Button type="button" variant="outline" className="flex-1" onClick={handleClearFilters}>
             Limpiar
           </Button>

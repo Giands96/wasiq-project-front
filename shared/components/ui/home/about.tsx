@@ -48,11 +48,11 @@ export default function About() {
           
           {/* COLUMNA IZQUIERDA - TEXTO */}
           <div className="order-1 lg:order-1 flex flex-col justify-center">
-            <span className="text-xs font-semibold text-orange-500 uppercase tracking-widest mb-4 inline-block">
+            <span className="text-xs font-semibold text-primary uppercase tracking-widest mb-4 inline-block">
               Sobre Wasiq
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Wasiq es <span className="text-orange-500">tu aliado</span> inmobiliario
+              Wasiq es <span className="text-primary">tu aliado</span> inmobiliario
             </h2>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
               Somos un portal web inmobiliario que conecta a personas con propiedades 
@@ -68,8 +68,8 @@ export default function About() {
                 { title: "Información Completa", desc: "Todos los detalles que necesitas para decidir" }
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-soft flex items-center justify-center">
+                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>

@@ -32,7 +32,7 @@ export const usePropertyStore = create<PropertyState>((set) => ({
     try {
       const response = await PropertyService.getPropertiesList(params);
       set({ 
-        properties: response.content,
+        properties: Array.isArray(response.content) ? response.content : [],
         currentPage: response.number || 0,
         totalPages: response.totalPages,
         totalElements: response.totalElements

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import React from "react";
 import { ROUTES } from "@/shared/constants/routes";
 
@@ -38,7 +38,7 @@ export const FooterComponent = () => {
               className="inline-flex items-baseline text-2xl md:text-3xl font-bold text-white tracking-tight group"
             >
               Wasiq
-              <span className="text-orange-500 group-hover:scale-125 transition-transform duration-300">.</span>
+              <span className="text-primary-bright group-hover:scale-125 transition-transform duration-300">.</span>
             </Link>
             <p className="mt-4 text-sm text-gray-400 leading-relaxed max-w-xs">
               Tu mejor aliado inmobiliario. Conectamos personas con propiedades de valor real.
@@ -48,7 +48,7 @@ export const FooterComponent = () => {
           {/* Navegación */}
           <div>
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1 h-4 bg-orange-500 rounded-full" />
+              <span className="w-1 h-4 bg-primary-bright rounded-full" />
               Navegación
             </h3>
             <ul className="space-y-3">
@@ -82,7 +82,7 @@ export const FooterComponent = () => {
           {/* Por Operación */}
           <div>
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1 h-4 bg-orange-500 rounded-full" />
+              <span className="w-1 h-4 bg-primary-bright rounded-full" />
               Por Operación
             </h3>
             <ul className="space-y-3">
@@ -102,7 +102,7 @@ export const FooterComponent = () => {
           {/* Por Tipo */}
           <div>
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1 h-4 bg-orange-500 rounded-full" />
+              <span className="w-1 h-4 bg-primary-bright rounded-full" />
               Por Tipo
             </h3>
             <ul className="space-y-3">

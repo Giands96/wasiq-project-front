@@ -75,8 +75,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                             {/* Características principales */}
                             <div className='grid grid-cols-2 md:grid-cols-4 gap-4 py-6 border-y border-gray-200'>
                                 <div className='flex items-center gap-3'>
-                                    <div className='p-2 bg-blue-50 rounded-lg'>
-                                        <Bed className='w-5 h-5 text-blue-600' />
+                                    <div className='p-2 bg-primary-soft rounded-lg'>
+                                        <Bed className='w-5 h-5 text-primary' />
                                     </div>
                                     <div>
                                         <p className='text-sm text-gray-500'>Habitaciones</p>
@@ -84,8 +84,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-3'>
-                                    <div className='p-2 bg-blue-50 rounded-lg'>
-                                        <Bath className='w-5 h-5 text-blue-600' />
+                                    <div className='p-2 bg-primary-soft rounded-lg'>
+                                        <Bath className='w-5 h-5 text-primary' />
                                     </div>
                                     <div>
                                         <p className='text-sm text-gray-500'>Baños</p>
@@ -93,8 +93,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-3'>
-                                    <div className='p-2 bg-blue-50 rounded-lg'>
-                                        <Maximize className='w-5 h-5 text-blue-600' />
+                                    <div className='p-2 bg-primary-soft rounded-lg'>
+                                        <Maximize className='w-5 h-5 text-primary' />
                                     </div>
                                     <div>
                                         <p className='text-sm text-gray-500'>Área</p>
@@ -102,8 +102,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-3'>
-                                    <div className='p-2 bg-blue-50 rounded-lg'>
-                                        <Home className='w-5 h-5 text-blue-600' />
+                                    <div className='p-2 bg-primary-soft rounded-lg'>
+                                        <Home className='w-5 h-5 text-primary' />
                                     </div>
                                     <div>
                                         <p className='text-sm text-gray-500'>Tipo</p>
@@ -130,7 +130,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                 </div>
                                 <div className='p-4 bg-gray-50 rounded-lg'>
                                     <p className='text-sm text-gray-500 mb-1'>Estado</p>
-                                    <p className={`font-semibold ${property.available ? 'text-blue-500' : 'text-neutral-600'}`}>
+                                    <p className={`font-semibold ${property.available ? 'text-primary' : 'text-neutral-600'}`}>
                                         {property.available ? 'Disponible' : 'No disponible'}
                                     </p>
                                 </div>
@@ -153,7 +153,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                                 </div>
                                 <p className='text-sm text-gray-500'>
                                     {property.propertyType === 'HOUSE' ? 'CASA' :
-                                        property.propertyType === 'APARTMENT' ? 'DEPARTAMENT    O' :
+                                        property.propertyType === 'APARTMENT' ? 'DEPARTAMENTO' :
                                             property.propertyType === 'LAND' ? 'TERRENO' : 'PROPIEDAD'} • {property.operationType === 'SALE' ? 'VENTA' : 'ALQUILER'}
                                 </p>
                             </div>
@@ -180,7 +180,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
 
                             {/* Badge de disponibilidad */}
                             <div className={`text-center py-2 px-4 rounded-lg ${property.available
-                                ? 'bg-orange-100 text-orange-700'
+                                ? 'bg-primary-soft text-primary'
                                 : 'bg-gray-100 text-gray-500'
                                 }`}>
                                 <p className='text-sm font-regular'>
