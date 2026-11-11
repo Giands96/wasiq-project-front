@@ -26,7 +26,7 @@ const isPublicPropertiesReadRequest = (url?: string, method?: string): boolean =
 
 
 const api = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: '/api',
     headers: {
         'Content-Type' : 'application/json'
     },
